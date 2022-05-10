@@ -157,6 +157,7 @@ public class docSO {
         if (num==0){
             System.out.println("zero");
         }else {
+
             System.out.println( docSo(num));
         }
 
