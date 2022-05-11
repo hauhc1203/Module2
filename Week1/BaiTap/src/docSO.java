@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class docSO {
 
-    static String docSo(int num){
+    static String docSo (int num){
         String result="" ;
         if(num/100>0){
             switch (num/100){
