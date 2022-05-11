@@ -51,7 +51,12 @@ public class addValue {
                    int value= sc.nextInt();
                    System.out.println("Nhap vao vi tri ");
                    int index= sc.nextInt();
-                   arr=chenGiatri(arr,value,index);
+                   if(index<0||index>arr.length-1){
+                       System.out.println("Khong chen duoc vao index da nhap");
+                   }else {
+                       arr=chenGiatri(arr,value,index);
+                   }
+
                    break;
                case 0:
                    System.exit(0);
