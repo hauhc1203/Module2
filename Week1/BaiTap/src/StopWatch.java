@@ -43,17 +43,17 @@ public class StopWatch {
 
     public static void main(String[] args) {
         // khoi tao mang 1000 phan tu
-        int []arr=new int[1000];
+        int []arr=new int[100000];
 
         StopWatch st=new StopWatch();
 
         //nhap gia tri random trong khoang tu 1 den 1000 vao mang
-        for (int i=0;i<1000;i++){
+        for (int i=0;i<100000;i++){
             Random r=new Random();
-            arr[i]=r.nextInt(1000)+1;
+            arr[i]=r.nextInt(100000)+1;
         }
         //in ra mang ban dau
-        System.out.println("mang ban dau");
+        System.out.println("mang ban dau--------------------------------------------------------------------------------------------------------------------");
         for (int ar:arr){
             System.out.print(ar+" ");
         }
@@ -75,7 +75,7 @@ public class StopWatch {
        st.stop();
 
         //in mang sau sx
-        System.out.println("mang sau sx");
+        System.out.println("mang sau sx--------------------------------------------------------------------------------------------------------------------------");
         for (int ar:arr){
             System.out.print(ar+" ");
         }
