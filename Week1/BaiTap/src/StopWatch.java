@@ -80,7 +80,7 @@ public class StopWatch {
             System.out.print(ar+" ");
         }
         System.out.println("");
-        System.out.println("Thoi gian chay ct:"+(st.getElapsedTime()/1000)+" s");
+        System.out.println("Thoi gian chay ct:"+st.getElapsedTime()+" mili s");
 
     }
 
