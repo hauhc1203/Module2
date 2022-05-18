@@ -2,6 +2,11 @@ import java.sql.Date;
 import java.util.Scanner;
 
 public class QLCB {
+    final static int KY_SU=2;
+    final static int CONG_NHAN=1;
+    final static int NHAN_VIEN=3;
+
+
     Scanner sc=new Scanner(System.in);
     CanBo []dscb=new CanBo[0];
     CanBo []dstk=new CanBo[0];
@@ -23,17 +28,19 @@ public class QLCB {
 
                 switch (choice1){
                     case 1:
-                        CanBo cb=create(1);
+                        CanBo cb=create(CONG_NHAN);
                         add(cb);
                         break;
                     case 2:
-                         cb=create(2);
+                         cb=create(KY_SU);
                          add(cb);
                         break;
                     case 3:
-                        cb=create(3);
+                        cb=create(NHAN_VIEN);
                         add(cb);
                         break;
+                    default:
+                        System.out.println("No choice");
                 }
                 break;
             case 2:
@@ -51,6 +58,8 @@ public class QLCB {
                 break;
             case 5:
                 System.exit(0);
+            default:
+                System.out.println("No choice");
         }
     }
     public CanBo create(int chucvu){
@@ -70,15 +79,15 @@ public class QLCB {
         System.out.println("Nhap dia chi");
         String diaChi=sc.nextLine();
 
-           if(chucvu==1) {
+           if(chucvu==CONG_NHAN) {
                System.out.println("Nhap bac(1->7)");
                int bac = Integer.parseInt(sc.nextLine());
                return new CongNhan(name, new Date(year - 1900, month - 1, day), gioiTinh, diaChi, bac);
-           }else  if(chucvu==2){
+           }else  if(chucvu==KY_SU){
                System.out.println("Nhap nganh dao tao");
                String nganhDaoTao=sc.nextLine();
                return  new KySu(name,new Date(year-1900,month-1,day),gioiTinh,diaChi,nganhDaoTao);
-            }else if(chucvu==3){
+            }else if(chucvu==NHAN_VIEN){
                 System.out.println("Nhap Cong Viec");
                 String congViec=sc.nextLine();
                 return new NhanVien(name,new Date(year-1900,month-1,day),gioiTinh,diaChi,congViec);
