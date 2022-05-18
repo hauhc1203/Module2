@@ -1,5 +1,5 @@
 package bt;
 
-public interface Resizeable<S> {
+public interface Resizeable {
         void reSize(double percent);
 }

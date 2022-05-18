@@ -6,7 +6,7 @@ public class Main {
         CircleResize circleResize=new CircleResize(30);
 
         System.out.println(circleResize);
-        circleResize.reSize(50);
+        circleResize.reSize(150);
         System.out.println(circleResize);
 
 
