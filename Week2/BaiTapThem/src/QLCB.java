@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class QLCB {
     Scanner sc=new Scanner(System.in);
     CanBo []dscb=new CanBo[0];
+    CanBo []dstk=new CanBo[0];
     public void menu(){
         System.out.println("-------Menu-------");
         System.out.println("1. Nhap Thong Tin Cho Can Bo Moi");
@@ -53,6 +54,9 @@ public class QLCB {
         }
     }
     public CanBo create(int chucvu){
+
+
+
         System.out.println("Nhap ten");
         String name=sc.nextLine();
         System.out.println("Nhap ngay sinh");
@@ -90,17 +94,30 @@ public class QLCB {
             return dscb;
     }
 
-    public void search(String name){
+    public CanBo[] search(String name){
         int i=0;
+        int c=0;
         for(CanBo cb: dscb){
             if (cb.getTen().equals(name)){
+
+                c++;
+            }
+        }
+        CanBo []dstk1=new CanBo[c];
+        for (int j=0;j<dscb.length;j++){
+            if(dscb[j].getTen().equals(name)){
+                dstk1[i]=dscb[j];
                 i++;
             }
         }
-        System.out.println("co "+i+" ket qua duoc tim thay");
+        dstk=dstk1;
+        System.out.println("co "+c+" ket qua duoc tim thay");
+        return dstk;
     }
     public void show(){
-
+        for (CanBo s:dstk){
+            System.out.println(s);
+        }
 
     }
 }
