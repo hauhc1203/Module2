@@ -103,7 +103,7 @@ public class ManagerNV {
         NhanVien []dsnv1=new NhanVien[dsnv.length-1];
 
         for (NhanVien nv:dsnv
-             ) {
+        ) {
             if(nv.getId()!=id){
                 dsnv1[i]=nv;
                 i++;
