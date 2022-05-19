@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4b256844-add7-4393-a878-61407b01a800" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/BaiTapW2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLNV/QLNV.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../QLNV/QLNV.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLNV/src/FullTime.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLNV/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLNV/src/ManagerNV.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLNV/src/NhanVien.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../QLNV/src/PartTime.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/MiniTest/ManagerNV.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../out/production/MiniTest/ManagerNV.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/QLNV/FullTime.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/QLNV/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/QLNV/ManagerNV.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/QLNV/NhanVien.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/QLNV/PartTime.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/Week2/Circle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/Week2/Cylinder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../out/production/Week2/Main.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="29McCR2Sn4ZSmU4B9zufTkBQSLj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/IJ Project/Module2"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4b256844-add7-4393-a878-61407b01a800" name="Changes" comment="" />
+      <created>1652926266441</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652926266441</updated>
+      <workItem from="1652926267777" duration="9000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
