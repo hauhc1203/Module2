@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class MyList<A> {
     private int size=0;
-    static final int DEFAULT_CAPCITY=10;
+    static final int DEFAULT_CAPCITY=2;
     private Object elements[];
 
     public MyList() {

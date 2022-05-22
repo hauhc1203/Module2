@@ -1,20 +1,21 @@
 package th2;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ComparableCircleTest {
     public static void main(String[] args) {
-        ComparableCircle[] circles = new ComparableCircle[3];
-        circles[0] = new ComparableCircle(3.6);
-        circles[1] = new ComparableCircle();
-        circles[2] = new ComparableCircle(3.5, "indigo");
+        ArrayList<ComparableCircle> circles = new ArrayList<>();
+        circles.add(new ComparableCircle(3.6)) ;
+        circles.add(new ComparableCircle()  );
+        circles.add(new ComparableCircle(3.5, "indigo"));
 
         System.out.println("Pre-sorted:");
         for (ComparableCircle circle : circles) {
             System.out.println(circle);
         }
 
-        Arrays.sort(circles);
+        Collections.sort(circles);
 
         System.out.println("After-sorted:");
         for (ComparableCircle circle : circles) {

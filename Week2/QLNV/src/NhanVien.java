@@ -1,4 +1,4 @@
-public class NhanVien {
+public class NhanVien implements Comparable<NhanVien> {
     private int id;
     private String name;
     private int age;
@@ -48,5 +48,11 @@ public class NhanVien {
                 "id=" + id +
                         ", name='" + name + '\'' +
                         ", age=" + age;
+    }
+    @Override
+    public int compareTo(NhanVien o) {
+        if (getId()> o.getId()){
+            return 1;
+        }else return -1;
     }
 }

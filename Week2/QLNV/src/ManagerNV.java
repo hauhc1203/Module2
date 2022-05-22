@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
-public class ManagerNV {
+
+
+public class ManagerNV  {
 
     Scanner sc=new Scanner(System.in);
 
-    NhanVien dsnv[]=new NhanVien[0];
+    ArrayList<NhanVien> dsnv=new ArrayList<>();
 
 
     public void Menu(){
@@ -24,11 +28,11 @@ public class ManagerNV {
                 switch (choice1){
                     case 1:
                         NhanVien nv=createNV(false);
-                        addNV(nv);
+                        dsnv.add(nv);
                         break;
                     case 2:
                         nv=createNV(true);
-                        addNV(nv);
+                        dsnv.add(nv);
                         break;
                 }
                 break;
@@ -58,7 +62,8 @@ public class ManagerNV {
                 }
                 break;
             case 5:
-                for (NhanVien nv:dsnv){
+                Collections.sort(dsnv);
+                for (NhanVien nv:clone()){
                     System.out.println(nv);
                 }
         }
@@ -82,34 +87,39 @@ public class ManagerNV {
             return new PartTime(id,name,age,soNgay);
         }
     }
-    public NhanVien[] addNV(NhanVien nhanVien){
-        NhanVien []dsnv1=new NhanVien[dsnv.length+1];
-        System.arraycopy(dsnv,0,dsnv1,0,dsnv.length);
-        dsnv1[dsnv1.length-1]=nhanVien;
-        dsnv=dsnv1;
-        return dsnv;
-    }
-    public NhanVien[] editNV(NhanVien nhanVien){
-        for (int i=0;i< dsnv.length;i++) {
-            if (dsnv[i].getId()==nhanVien.getId()){
-                dsnv[i]=nhanVien;
+//    public NhanVien[] addNV(NhanVien nhanVien){
+//        NhanVien []dsnv1=new NhanVien[dsnv.length+1];
+//        System.arraycopy(dsnv,0,dsnv1,0,dsnv.length);
+//        dsnv1[dsnv1.length-1]=nhanVien;
+//        dsnv=dsnv1;
+//        return dsnv;
+//    }
+    public void editNV(NhanVien nhanVien){
+        for (int i=0;i< dsnv.size();i++) {
+            if (dsnv.get(i).getId()==nhanVien.getId()){
+                dsnv.set(i,nhanVien);
             }
         }
-        return dsnv;
     }
 
     static int i=0;
-    public NhanVien[] delNV(int id){
-        NhanVien []dsnv1=new NhanVien[dsnv.length-1];
+    public void delNV(int id){
+       for (int i=0;i<dsnv.size();i++){
+           if (dsnv.get(i).getId()==id){
+                dsnv.remove(i);
+           }
+       }
 
-        for (NhanVien nv:dsnv
-        ) {
-            if(nv.getId()!=id){
-                dsnv1[i]=nv;
-                i++;
-            }
-        }
-        dsnv=dsnv1;
-        return  dsnv;
     }
+    public ArrayList<NhanVien> clone(){
+        ArrayList<NhanVien> clone1=new ArrayList<>();
+        clone1=(ArrayList<NhanVien>) dsnv.clone();
+        return clone1;
+    }
+
+
+
+
+
+
 }
