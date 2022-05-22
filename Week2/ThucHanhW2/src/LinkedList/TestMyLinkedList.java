@@ -8,7 +8,7 @@ public class TestMyLinkedList {
         ll.addFirst(12);
         ll.addFirst(13);
         ll.add(5,3);
-        ll.add(2,9);
+        ll.add(6,9);
         ll.add(4,1);
         ll.printList();
         System.out.println("------------------------------------------------");
