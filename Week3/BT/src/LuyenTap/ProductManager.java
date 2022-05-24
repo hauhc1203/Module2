@@ -2,10 +2,12 @@ package LuyenTap;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class ProductManager {
     ArrayList<Product> dssp=new ArrayList<>();
+    LinkedList<Product> products=new LinkedList<>();
     Scanner sc=new Scanner(System.in);
 
 

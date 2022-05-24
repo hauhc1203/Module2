@@ -3,9 +3,13 @@ package LuyenTap;
 public class Main {
 
     public static void main(String[] args) {
-        ProductManager productManager=new ProductManager();
+//        ProductManager productManager=new ProductManager();
+//        while (true){
+//            productManager.menu();
+//        }
+        PMLinkedList pmLinkedList=new PMLinkedList();
         while (true){
-            productManager.menu();
+            pmLinkedList.menu();
         }
     }
 }
