@@ -1,6 +1,6 @@
 package hashMap_hashSet;
 
-public class Student {
+public class Student implements Comparable<Student>{
     private String name;
     private int age;
     private String address;
@@ -45,5 +45,13 @@ public class Student {
                 ", age=" + age +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        if (this.age>o.age){
+            return 1;
+        }else
+            return -1;
     }
 }
