@@ -50,8 +50,7 @@ public class Nguoi {
     @Override
     public String toString() {
 
-        DateFormat dateFormat = null;
-        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 
         return "Nguoi{" +

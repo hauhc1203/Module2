@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class SortbyGia extends KhachSan implements Comparator<KhachSan> {
+public class SortbyGia  extends KhachSan implements  Comparator<KhachSan> {
 
     @Override
     public int compare(KhachSan o1, KhachSan o2) {

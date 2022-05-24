@@ -35,12 +35,14 @@ public class Manager<E> {
                 show();
                 break;
             case 5:
+                System.out.println("Nhap vao ten");
+                String name=sc.nextLine();
+                searchByName(name);
                 break;
 
         }
 
     }
-
     public  void create(int doituong){
            if (doituong==KHACH_HANG){
                System.out.println("Nhap vao first name");
@@ -55,7 +57,6 @@ public class Manager<E> {
                int year=Integer.parseInt(sc.nextLine());
                System.out.println("Nhap vao so cmnd");
                int cmnd=Integer.parseInt(sc.nextLine());
-
                Nguoi kh=new Nguoi(new Name(firstName,lastName),new Date(year-1900,month-1,day),cmnd);
                add((E)kh);
 
@@ -73,8 +74,13 @@ public class Manager<E> {
     public void add(E e){
         danhsach.add(e);
     }
-    public void del(int id){
-        danhsach.remove(id);
+    public void searchByName(String  name){
+        for (E e:danhsach){
+            if (((Nguoi)e).getHoVaTen().getLastName().equals(name)){
+                System.out.println(e);
+            }
+        }
+
     }
     public void show(){
         for (E e:danhsach
