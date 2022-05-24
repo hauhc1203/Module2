@@ -1,10 +1,10 @@
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
-public class Manager<E> {
-    ArrayList<E> danhsach=new ArrayList<>();
+public class Manager {
+    ArrayList<KhachSan> dsp=new ArrayList<>();
+    ArrayList<Nguoi> dskh=new ArrayList<>();
     Scanner sc=new Scanner(System.in);
     final static int PHONG=0;
     final static int KHACH_HANG=1;
@@ -26,13 +26,13 @@ public class Manager<E> {
                 break;
             case 3:
                 SortbyGia a= new SortbyGia();
-                danhsach.sort((Comparator<? super E>) a);
-                show();
+                dsp.sort( a);
+                show(PHONG);
                 break;
             case 4:
                 SortByDate s=new SortByDate();
-                danhsach.sort((Comparator<? super E>) s);
-                show();
+                dskh.sort( s);
+                show(KHACH_HANG);
                 break;
             case 5:
                 System.out.println("Nhap vao ten");
@@ -58,7 +58,7 @@ public class Manager<E> {
                System.out.println("Nhap vao so cmnd");
                int cmnd=Integer.parseInt(sc.nextLine());
                Nguoi kh=new Nguoi(new Name(firstName,lastName),new Date(year-1900,month-1,day),cmnd);
-               add((E)kh);
+               add(kh);
 
            }else if (doituong==PHONG){
                System.out.println("Nhap loai phong");
@@ -68,24 +68,36 @@ public class Manager<E> {
                System.out.println("Nhap dia chi phong");
                String diaChiP=sc.nextLine();
                KhachSan phong= new KhachSan(loaiP,gia,diaChiP);
-               add((E)phong);
+               add(phong);
            }
     }
-    public void add(E e){
-        danhsach.add(e);
+    public void add(KhachSan e){
+        dsp.add(e);
+    }
+    public void add(Nguoi e){
+        dskh.add(e);
     }
     public void searchByName(String  name){
-        for (E e:danhsach){
-            if (((Nguoi)e).getHoVaTen().getLastName().equals(name)){
+        for (Nguoi e:dskh){
+            if (e.getHoVaTen().getLastName().equals(name)){
                 System.out.println(e);
             }
         }
 
     }
-    public void show(){
-        for (E e:danhsach
-             ) {
-            System.out.println(e);
+    public void show(int doituong){
+
+        if (doituong==KHACH_HANG)
+        {
+            for (Nguoi e:dskh
+            ) {
+                System.out.println(e);
+            }
+        }else if (doituong==PHONG){
+            for (KhachSan e:dsp
+            ) {
+                System.out.println(e);
+            }
         }
     }
 

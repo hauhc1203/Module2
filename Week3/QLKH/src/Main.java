@@ -1,6 +1,6 @@
-public class QLKH {
+public class Main {
     public static void main(String[] args) {
-        Manager<Nguoi> qlkh=new Manager<>();
+        Manager qlkh=new Manager();
         while (true){
             qlkh.menu();
         }
