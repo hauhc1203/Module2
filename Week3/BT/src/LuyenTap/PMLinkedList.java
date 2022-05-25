@@ -111,8 +111,12 @@ public class PMLinkedList {
             products.remove(index);
         }
         public void show(){
-            for (int i=0;i<products.size();i++){
-                    System.out.println(products.get(i));
+//            for (int i=0;i<products.size();i++){
+//                    System.out.println(products.get(i));
+//            }
+            for (Product x: products) {
+                System.out.println(x);
+
             }
         }
     }
