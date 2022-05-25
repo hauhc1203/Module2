@@ -1,5 +1,6 @@
+import java.util.Random;
+
 public class BubbleSort {
-    static int []arr={1,2,3,4,5,6,7,8,9,10,12,12,1,21,2,12,12,12,12,1,2,3,123,12,3,123,12,123,12,3,12,3,123,12,3,21,3,12,3,123,12,4,12,3,123,12,3,12,3};
 
     static void bubbleSort(int[] arr){
         boolean needSort=true;
@@ -17,6 +18,11 @@ public class BubbleSort {
         }
     }
     public static void main(String[] args) {
+        int []arr=new int[1000];
+        for (int i=0;i<1000;i++){
+            int r=new Random().nextInt(100)+1;
+            arr[i]=r;
+        }
 
         System.out.println("truoc sx");
         for (int a:arr
@@ -27,11 +33,13 @@ public class BubbleSort {
         bubbleSort(arr);
         double stop=System.currentTimeMillis();
 
-        System.out.println("thoi gian thuc hien: "+(stop-start));
+
+        System.out.println("sau sx");
         for (int a:arr
         ) {
             System.out.println(a);
         }
+        System.out.println("thoi gian thuc hien: "+(stop-start));
     }
 
 
