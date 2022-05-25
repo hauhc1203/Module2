@@ -25,6 +25,7 @@ public class SubString {
         for (Character c:subStringMax
              ) {
             System.out.print(c);
+
         }
     }
 
