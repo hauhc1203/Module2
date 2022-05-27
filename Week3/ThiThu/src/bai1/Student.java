@@ -1,4 +1,4 @@
-package model;
+package bai1;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,10 +45,9 @@ public class Student {
     @Override
     public String toString() {
         SimpleDateFormat df=new SimpleDateFormat("dd/MM/yyyy");
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", birthDay=" + df.format(birthDay) +
-                ", address='" + address + '\'' +
-                '}';
+        return
+                " name= '" + name + '\'' +
+                ", birthDay= " + df.format(birthDay) +
+                ", address= '" + address + '\'';
     }
 }
