@@ -20,10 +20,20 @@ public class QLHS {
         int choice=Integer.parseInt(sc.nextLine());
         switch (choice){
             case 1:
-                System.out.println("nhap so luong ho so");
-                int number=Integer.parseInt(sc.nextLine());
-                nhap(number);
-                break;
+
+                while (true){
+                    System.out.println("Nhập số lượng hồ sơ");
+                    try {
+                       int number=Integer.parseInt(sc.nextLine());
+                        nhap(number);
+                        break;
+                    }catch (Exception e){
+                        System.out.println("Hãy nhập vào 1 số");
+                        System.out.println("----------------------");
+                    }
+                }
+
+
             case 2:
                 showByAddressAndYear();
                 break;
