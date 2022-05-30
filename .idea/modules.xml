@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/Week1/MiniTest/MiniTest.iml" filepath="$PROJECT_DIR$/Week1/MiniTest/MiniTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Module2.iml" filepath="$PROJECT_DIR$/.idea/Module2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week3/Optional/Optional.iml" filepath="$PROJECT_DIR$/Week3/Optional/Optional.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Week4/QLHV_CODEGYM/QLHV_CODEGYM.iml" filepath="$PROJECT_DIR$/Week4/QLHV_CODEGYM/QLHV_CODEGYM.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week3/QLKH/QLKH.iml" filepath="$PROJECT_DIR$/Week3/QLKH/QLKH.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week2/QLNV/QLNV.iml" filepath="$PROJECT_DIR$/Week2/QLNV/QLNV.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week3/QuickSort/QuickSort.iml" filepath="$PROJECT_DIR$/Week3/QuickSort/QuickSort.iml" />
@@ -19,6 +20,7 @@
       <module fileurl="file://$PROJECT_DIR$/Week1/Week1.iml" filepath="$PROJECT_DIR$/Week1/Week1.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week2/Week2.iml" filepath="$PROJECT_DIR$/Week2/Week2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week3/Week3.iml" filepath="$PROJECT_DIR$/Week3/Week3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Week4/Week4.iml" filepath="$PROJECT_DIR$/Week4/Week4.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week3/linkedlist/linkedlist.iml" filepath="$PROJECT_DIR$/Week3/linkedlist/linkedlist.iml" />
     </modules>
   </component>
