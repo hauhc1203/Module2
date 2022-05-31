@@ -207,8 +207,11 @@ public class QLHV {
     void saveDSHV(){
         try {
             qlhv.createNewFile();
+
             PrintWriter printWriter =new PrintWriter(qlhv);
             BufferedWriter bufferedWriter=new BufferedWriter(printWriter);
+
+
             for(Student s:dshv){
                 bufferedWriter.write(s.toSave());
                 bufferedWriter.newLine();
