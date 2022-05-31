@@ -6,19 +6,20 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class QLHV {
-    File qlhv=new File("qlhv.csv");
-    File dslop=new File("dsl.csv");
+    File qlhv=new File("D:\\IJ Project\\Module2\\Week4\\file\\qlhv.csv");
+    File dslop=new File("D:\\IJ Project\\Module2\\Week4\\file\\dsl.csv");
     ArrayList<Student> dshv=new ArrayList<>();
     ArrayList<Lop> dsl=new ArrayList<>();
     SimpleDateFormat df=new SimpleDateFormat("dd/MM/yyyy");
     Scanner sc=new Scanner(System.in);
     public void menu(){
+
         System.out.println("--------------menu---------------");
         System.out.println("1. Thêm học viên");
         System.out.println("2. Thêm lớp");
         System.out.println("3. Hiển thị học viên");
         System.out.println("4. Hiển thị danh sách học viên theo lớp");
-        System.out.println("0. Exit");
+        System.out.println("0. Save and Exit");
         int choice=Integer.parseInt(sc.nextLine());
         switch (choice){
             case 1:
@@ -34,16 +35,20 @@ public class QLHV {
                                index=Integer.parseInt(sc.nextLine());
                                if (dsl.get(index).getSoLuongHienTai()>=dsl.get(index).getSoLuongToiDa()){
                                    System.out.println("Lớp bạn chọn đã đầy. Vui lòng chọn lớp khác");
+                                   System.out.println("----------------------------------------------------");
                                }
                            }while (dsl.get(index).getSoLuongHienTai()>=dsl.get(index).getSoLuongToiDa());
                            createS(dsl.get(index));
                            break;
                        }catch (IndexOutOfBoundsException e){
                            System.out.println("Nhập vào index dựa theo danh sách ở trên");
+
+                           System.out.println("--------------------------------------------------");
                        }
                    }
                 }else {
                     System.out.println("Hiện tại chưa có lớp nào");
+                    System.out.println("--------------------------------------------------");
                 }
                 break;
             case 2:
@@ -62,9 +67,14 @@ public class QLHV {
 
                 }else {
                     System.out.println("Hiện tại chưa có lớp nào");
+                    System.out.println("--------------------------------------------------");
                 }
                 break;
+
+
             case 0:
+                saveDSL();
+                saveDSHV();
                 System.exit(0);
             default:
                 System.out.println("No choice!!!");
@@ -73,8 +83,16 @@ public class QLHV {
     void createS(Lop lop){
         System.out.println("Nhập vào tên học sinh");
         String nameS=sc.nextLine();
-        System.out.println("Nhập vào tuổi ");
-        int age=Integer.parseInt(sc.nextLine());
+        int age;
+        while (true){
+           try {
+               System.out.println("Nhập vào tuổi ");
+               age=Integer.parseInt(sc.nextLine());
+               break;
+           }catch (Exception e){
+               System.out.println("Nhập vào 1 số");
+           }
+        }
         Date birthDay=null;
         while (true){
             try {
@@ -94,6 +112,7 @@ public class QLHV {
                break;
            }catch (Exception e){
                System.out.println("Chỉ nhập số ");
+               System.out.println("--------------------------------------------------");
            }
        }
         System.out.println("Nhập vào quê quán");
@@ -121,8 +140,17 @@ public class QLHV {
         }
         System.out.println("Nhập vào khóa học");
         String khoaHoc=sc.nextLine();
-        System.out.println("Nhập vào số lượng học viên tối đa");
-        int max=Integer.parseInt(sc.nextLine());
+        int max;
+        while (true)
+        {
+          try {
+              System.out.println("Nhập vào số lượng học viên tối đa");
+              max=Integer.parseInt(sc.nextLine());
+              break;
+          }catch (Exception e){
+              System.out.println("Vui lòng Nhập số");
+          }
+         }
         addL(new Lop(className,start,khoaHoc,max));
     }
 
@@ -165,11 +193,82 @@ public class QLHV {
             dslop.createNewFile();
             PrintWriter printWriter =new PrintWriter(dslop);
             BufferedWriter bufferedWriter=new BufferedWriter(printWriter);
-          //  for()
-
+            for(Lop l:dsl){
+                bufferedWriter.write(l.toSave());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+            printWriter.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+    void saveDSHV(){
+        try {
+            qlhv.createNewFile();
+            PrintWriter printWriter =new PrintWriter(qlhv);
+            BufferedWriter bufferedWriter=new BufferedWriter(printWriter);
+            for(Student s:dshv){
+                bufferedWriter.write(s.toSave());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+            printWriter.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    void loadDSL(){
+        try {
+            FileReader fileReader=new FileReader("D:\\IJ Project\\Module2\\Week4\\file\\dsl.csv");
+            BufferedReader br = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                String []lop= line.split(",");
+                String date=lop[1];
+                addL(new Lop(lop[0],df.parse(date),lop[2],Integer.parseInt(lop[3]),Integer.parseInt(lop[4])));
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    void loadDSHV(){
+        try {
+            FileReader fileReader=new FileReader("D:\\IJ Project\\Module2\\Week4\\file\\qlhv.csv");
+            BufferedReader br = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                String []dshv= line.split(",");
+                Lop l=null;
+                for (int i=0;i<dsl.size();i++){
+                    if (dsl.get(i).getClassName().equals(dshv[5])){
+                        l=dsl.get(i);
+                    }
+                }
+
+                String date=dshv[2];
+                addS(new Student(dshv[0],Integer.parseInt(dshv[1]),l,df.parse(date),Integer.parseInt(dshv[3]),dshv[4]));
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 }

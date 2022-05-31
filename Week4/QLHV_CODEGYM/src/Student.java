@@ -85,4 +85,13 @@ public class Student  {
                 ", address= '" + address + '\'' +
                 ", "+lop;
     }
+    public  String toSave(){
+        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
+        return  nameS +
+                "," + age +
+                "," + dateFormat.format(birthDay) +
+                "," + sdt +
+                "," + address +
+                ","+lop.toSave();
+    }
 }

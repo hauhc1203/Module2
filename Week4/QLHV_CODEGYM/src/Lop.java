@@ -17,7 +17,13 @@ public class Lop {
         this.soLuongToiDa = soLuongToiDa;
     }
 
-
+    public Lop(String className, Date start, String khoaHoc, int soLuongHienTai, int soLuongToiDa) {
+        this.className = className;
+        this.start = start;
+        this.khoaHoc = khoaHoc;
+        this.soLuongToiDa = soLuongToiDa;
+        this.soLuongHienTai = soLuongHienTai;
+    }
 
     public String getClassName() {
         return className;
@@ -68,5 +74,13 @@ public class Lop {
                 ", khoaHoc= '" + khoaHoc + '\'' +
                 ", soLuong hien tai= " + soLuongHienTai+ '\'' +
                 ", So luong toi da= "+soLuongToiDa;
+    }
+    public String toSave(){
+        SimpleDateFormat dateFormat=new SimpleDateFormat("dd/MM/yyyy");
+        return className +
+                "," + dateFormat.format(start) +
+                "," + khoaHoc +
+                "," + soLuongHienTai+
+                ","+soLuongToiDa;
     }
 }
