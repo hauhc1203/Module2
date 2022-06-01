@@ -65,7 +65,7 @@ public class StudentController {
                 break;
             case 6:
                 write();
-                read();
+                 dssv=read();
                 break;
             case 7:
                 write();
