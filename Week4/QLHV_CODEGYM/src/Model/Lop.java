@@ -1,7 +1,10 @@
+package Model;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Lop {
+public class Lop implements Serializable {
     private String className;
     private Date start;
     private String khoaHoc;

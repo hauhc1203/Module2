@@ -1,3 +1,9 @@
+package Controller;
+
+import Model.Lop;
+import Model.Student;
+import io.ReadAndWriteData;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,10 +12,17 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class QLHV {
+
+    File dshvB=new File("D:\\IJ Project\\Module2\\Week4\\QLHV_CODEGYM\\data\\dssv.csv");
+    File dslB=new File("D:\\IJ Project\\Module2\\Week4\\QLHV_CODEGYM\\data\\dsl.csv");
+
+    ReadAndWriteData readData=new ReadAndWriteData();
+
+
     File qlhv=new File("D:\\IJ Project\\Module2\\Week4\\file\\qlhv.csv");
     File dslop=new File("D:\\IJ Project\\Module2\\Week4\\file\\dsl.csv");
-    ArrayList<Student> dshv=new ArrayList<>();
-    ArrayList<Lop> dsl=new ArrayList<>();
+    ArrayList<Student> dshv=readData.read(dshvB);
+    public ArrayList<Lop> dsl=new ArrayList<>();
     SimpleDateFormat df=new SimpleDateFormat("dd/MM/yyyy");
     Scanner sc=new Scanner(System.in);
     public void menu(){
@@ -73,8 +86,9 @@ public class QLHV {
 
 
             case 0:
-                saveDSL();
-                saveDSHV();
+                readData.write(dshvB,dshv);
+//                saveDSL();
+//                saveDSHV();
                 System.exit(0);
             default:
                 System.out.println("No choice!!!");

@@ -1,7 +1,10 @@
+package Model;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Student  {
+public class Student implements Serializable {
     private String nameS;
     private int age;
 
