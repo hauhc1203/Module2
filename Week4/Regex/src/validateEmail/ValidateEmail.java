@@ -9,7 +9,7 @@ public class ValidateEmail {
     public static void main(String[] args) {
         emailExample=new EmailExample();
         for (String s:validEmail
-             ) {
+        ) {
             System.out.println(   emailExample.validate(s));
         }
         for (String s:invalidEmail

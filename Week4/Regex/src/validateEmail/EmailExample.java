@@ -7,7 +7,7 @@ public class EmailExample {
     private static Pattern pattern;
     private Matcher matcher;
 
-    private static final String EMAIL_REGEX =   "^[A-Za-z\\d]+[A-Za-z\\d]*@[A-Za-z\\d]+(\\.[A-Za-z\\d]+)$";
+    private static final String EMAIL_REGEX =   "^[A-Za-z\\d]+@[A-Za-z\\d]+(\\.[A-Za-z\\d]+)$";
 
     public EmailExample() {
         pattern = Pattern.compile(EMAIL_REGEX);
