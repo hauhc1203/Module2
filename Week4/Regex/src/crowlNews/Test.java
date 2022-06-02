@@ -1,4 +1,4 @@
-package crowlYT;
+package crowlNews;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,21 +11,21 @@ import java.util.regex.Pattern;
 public class Test {
     public static void main(String[] args) {
         try {
-            URL url = new URL("https://www.youtube.com");
+            URL url = new URL("https://dantri.com.vn/the-gioi.htm");
             Scanner scanner = new Scanner(new InputStreamReader(url.openStream()));
             scanner.useDelimiter("\\Z");
             String content = scanner.next();
             // close scanner
             scanner.close();
-            System.out.println(content);
+           // System.out.println(content);
 
             // remove all new line
-      //      content = content.replaceAll("\\n+", "");
+            content = content.replaceAll("\\n+", "");
             // regex
-            Pattern p = Pattern.compile("auto\">(.*?)</a>");
+            Pattern p = Pattern.compile("<h3 class=\"article-title\"> <a href(.*?)htm\">(.*?)</a>");
             Matcher m = p.matcher(content);
             while (m.find()) {
-                System.out.println(m.group(1));
+                System.out.println(m.group(2));
             }
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
