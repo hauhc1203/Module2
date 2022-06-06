@@ -1,0 +1,3 @@
+1. Thêm component vào JFrame
+    -Không thể thêm trực tiếp mà phải thông qua Content Pane của JFrame
+    - Đối tượng JFrame cung cấp 2 phương thức là getContentPane và setContentPane để tương tác với ContentPane

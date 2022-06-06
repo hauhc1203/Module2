@@ -1,0 +1,26 @@
+1.Flow Layout
+    -Các phần tử được sắp xếp lần lượt từ trái sang phải, tự xuống dòng khi hết dòng, có thể căn trái , phải hoặc giữa
+    -3 contructor: -0 tham số
+                   -1 tham số là căn lề
+                   -3 tham số: căn lề , hgap(theo chiều rộng) , vgap(theo chiều cao) : khoảng cách giữa các phần tử
+    -default: căn lề= CENTER, hgap =vgap=5
+
+2. grid Layout
+    - Các phần tử được sắp xếp theo dạng lưới , từ trái sang phài, từ trên xuống dưới
+    -contructor: -2 tham số : rows(hàng), cols(cột)
+                 -4 tham số :rows(hàng), cols(cột), hgap,vgap
+              mặc định : rows=1, cols=0, hgap=vgap=0
+    -Khi 1 trong hai giá trị cols và rows băng 0 thì các thành phần được sắp xếp theo giá trị còn lại
+    -Khi cả 2 giá trị cùng khác 0 thì cols sẽ bị bỏ qua.
+
+3.Border Layout
+    -Chia container là 5 zone đông tây nam bắc, và trung tâm. mỗi zone chỉ chứa 1 phần tử, nếu cố tình thêm nhiều phần
+    tử vào 1 zone mà không sử dụng panel thì sẽ chỉ hiển thị phần tử được thêm sau cùng
+    -nếu thêm 1 componet vào border layout mà không chỉ rõ zone, component đó sẽ được hiểu là thêm vào center
+    - 2 Contructor: + Không tham số
+                    + 2 Tham số: hgap, vgap
+    - Thêm 1 phần tử vào : add( a component, a Zone)
+4.Panel
+    -Trên Frame có thể thêm nhiều panel
+    -Các panel có thể sử dụng các layout khác nhau
+    -contructor: 1 thâm số là Layout

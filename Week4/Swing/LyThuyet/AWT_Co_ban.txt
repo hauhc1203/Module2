@@ -1,0 +1,53 @@
+1.Các thành phần cơ bản trong java AWT
+    -component: 1 thành phần có thể hiển thị trên màn hình đồ họa
+    -container: lớp chứa, bao chứa các thành phần khác
+        +1 đối tượng container có thể chứa các đối tượng container khác
+    -label: nhãn
+    -button
+    ..............
+2.Các gói trong java AWT
+    java.awt:gồm các lớp GUI cơ bản
+        -các lớp component(như button, TextComponent,Label
+        -Các lớp container - lớp chứa( Frame,panel,Dialog,Scollpanel)
+        -Các lớp quản lý layout(FlowLayout, BorderLayout,GridLayout)
+        -Các lớp đồ họa tùy biến(Graphics, Color, Font)
+    java.awt.event: gồm các lớp  xử lý sự kiện trên giao diện
+        -Các lớp sự kiện( ActionEvent, MouseEvent, KeyEvent và WindowEvent)
+        -Các Interface Listener( MouseListener, KeyListener,...)
+        -Các Adapter (MouseAdapter, KeyAdapter,WindowAdapter,...)
+
+# component : là các đối tượng  cơ bản tạo nên giao diện. Cho phép người dùng tương tác với chương trình
+# container: là đối tượng chứa các component.
+    + bản thân container cũng là 1 component
+    + 1 container có thể chứa các container khác
+    +Phương thức add(Component) : thêm 1 component vào container
+#TOP LEVEL Container: Frame, Dialog, và Applet
+    -frame: là màn hình chính của giao diện chương trình
+    -dialog: cửa sổ pop-up dược sử dụng để tạo ra các tương tác ngoài frame
+    -applet xây dựng ứng dụng web
+#SECONDARY Containers: Panel và ScollPanel
+    -panel: khung chữ nhật nằm trong 1 top-level container, được sử dụng để tạo layout cho chương trình
+    -ScollPanel:Tạo ra hiệu ứng cuộn cho 1 component
+#Các lớp component:
+    -TextField
+    -Choice
+    -Button
+    -CheckBox
+    -CheckBoxGroup
+    -Label
+    -List
+#Adapter:
+    -Trong trường hợp chỉ cần sử dụng một phương thức bắt sk trong số các phương thức của listener, ta có thể sử dụng adapter
+    -Lớp Adapter định nghĩa sẵn các phương thức  mà interface yêu cầu triển khai với phương thức rỗng
+    -Khi sử dụng Adapter chỉ chần ghi đè lên phương thức cần sử dụng
+3.Quản lý Layout và Panel
+    -layout : cách thức sắp xếp các phần tử (component)  trên cửa sổ. Trên cửa sổ frame chỉ được chọn 1 layout
+    -Khi cần sử dụng nhiều layout khác trên 1 cửa sổ frame, cần sử dụng  đối tượng lớp panel.
+    -Panel là 1 lớp chứa thứ cấp
+    -Các layout  cung cấp trong java AWT:
+        +FlowLayout
+        +GridLayout
+        +BorderLayout
+        +BoxLayout
+    3.1.FlowLayout
+
