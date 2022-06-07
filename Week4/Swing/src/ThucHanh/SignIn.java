@@ -1,79 +1,112 @@
 package ThucHanh;
+
 import validate.PasswordValidate;
+import validate.ValidateAcc;
 import validate.ValidateUserName;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 public class SignIn extends JFrame {
     private JTextField userName;
     private JPasswordField passwordField;
+
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+    }
+
     public SignIn()  {
-        setTitle("Sign in");
-        FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER,40,0);
+
+        FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER,120,40);
+        Font nghieng=new Font("nghieng",Font.PLAIN,12);
+        Font inDam=new Font("dam",Font.BOLD ,18);
         Container cp=this.getContentPane();
-        cp.setLayout(new GridLayout(4,0,0,0));
-        JPanel input=new JPanel();
-        JPanel input2=new JPanel();
+        cp.setLayout(new GridLayout(5,0,0,20));
+
+        JPanel uName=new JPanel(new FlowLayout(FlowLayout.CENTER,5,0));
+        JPanel passW=new JPanel(new FlowLayout(FlowLayout.CENTER,5,0));
         JPanel button=new JPanel(flowLayout);
+
         JLabel cap1=new JLabel("Bạn phải đăng nhập để sử dụng hệ thống !",JLabel.CENTER);
+        cap1.setFont(inDam);
         cp.add(cap1);
-        JLabel jLabel=new JLabel("User name:");
-        jLabel.setLocation(1,1);
-        jLabel.setPreferredSize(new Dimension(70,30));
-        input.add(jLabel);
-         userName=new JTextField("Nhập vào UserName có 8 đến 10 ký tự",20);
-         userName.addMouseListener(new MouseAdapter() {
-             int count=0;
-             @Override
-             public void mouseClicked(MouseEvent e) {
-                 if (count==0){
-                     userName.setText("");
-                     count++;
-                 }
-             }
-         });
+
+        JLabel vN=new JLabel("Nhập vào UserName có 8 đến 10 ký tự",JLabel.RIGHT);
+        vN.setFont(nghieng);
+        vN.setPreferredSize(new Dimension(450,20));
+        uName.add(vN);
+
+        JLabel uNameLabel=new JLabel("User name:");
+        uNameLabel.setFont(inDam);
+        uNameLabel.setPreferredSize(new Dimension(150,60));
+        uName.add(uNameLabel);
+
+         userName=new JTextField(25);
+         userName.setPreferredSize(new Dimension(150,30));
+
         userName.addKeyListener(new KeyAdapter() {
             @Override
            public void keyReleased(KeyEvent e) {
                String username = userName.getText();
-               if (!ValidateUserName.validate(username)&&e.getKeyCode()!=8&&e.getKeyCode()!=10) {
-                   JOptionPane.showMessageDialog(jLabel, "Nhập vào username không có kí tự đặc biệt");
+                boolean validName=ValidateUserName.validate(username);
+
+               if (!validName) {
+                       vN.setText("Username không  chứa kí tự đặc biệt, 8-15 kí tự ");
+               }else {
+                   vN.setText("UserName hợp lệ");
                }
            }
        });
-       input.add(userName);
-       JLabel jLabel2=new JLabel("Password:");
-       jLabel2.setPreferredSize(new Dimension(70,30));
-       input2.add(jLabel2);
-       passwordField=new JPasswordField(20);
+       uName.add(userName);
+
+        JLabel vP=new JLabel("Nhập password ít nhất 8 kí tự",JLabel.RIGHT);
+        vP.setFont(nghieng);
+        vP.setPreferredSize(new Dimension(450,20));
+        passW.add(vP);
+
+       JLabel passLabel=new JLabel("Password:");
+       passLabel.setFont(inDam);
+       passLabel.setPreferredSize(new Dimension(150,60));
+
+       passW.add(passLabel);
+       passwordField=new JPasswordField(25);
+       passwordField.setPreferredSize(new Dimension(150,30));
        passwordField.addKeyListener(new KeyAdapter() {
            @Override
            public void keyReleased(KeyEvent e) {
                String pass=passwordField.getText();
-               if (!PasswordValidate.validate(pass)&&e.getKeyCode()!=8&&e.getKeyCode()!=10){
-                   JOptionPane.showMessageDialog(jLabel2, "Password không chứa khoảng trống và tiếng việt");
+               boolean validPass=PasswordValidate.validate(pass);
+               if (validPass){
+                   vP.setText("Password hợp lệ");
+               }else {
+                   vP.setText("Password không có khoảng trắng, tiếng việt.Độ dài 8-15 kí tự");
+
                }
            }
        });
 
 
-       input2.add(passwordField);
+       passW.add(passwordField);
        JButton signIn=new JButton("Sign in");
         signIn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name=userName.getText();
                 String pass=passwordField.getText();
-                System.out.println(pass);
-                System.out.println(pass.length());
-
-                if(name.length()>10||name.length()<8){
-                   JOptionPane.showMessageDialog(jLabel,"Nhập vào username có từ 8 đến 10 kí tự");
-               }else if (pass.length()<8){
-                    JOptionPane.showMessageDialog(jLabel2,"Nhập vào password có ít nhất 8  kí tự, không đấu");
+                boolean isSign=ValidateAcc.validate(name,pass);
+                if (ValidateUserName.validate(name)&&PasswordValidate.validate(pass)){
+                    if (isSign){
+                        JOptionPane.showMessageDialog(null,"Đăng nhập thành công");
+                    }else {
+                        JOptionPane.showMessageDialog(null,"Username hoặc password không đúng");
+                    }
+                }else {
+                    JOptionPane.showMessageDialog(null,"Username hoặc password không hợp lệ");
                 }
-
-//                JOptionPane.showMessageDialog(null,"Username or password is invalid");
             }
         });
        button.add(signIn);
@@ -85,13 +118,14 @@ public class SignIn extends JFrame {
            }
        });
        button.add(cancel);
-       cp.add(input);
-       cp.add(input2);
+       cp.add(uName);
+       cp.add(passW);
        cp.add(button);
-      setSize(400,250);
+        setSize(500,450);
 
        ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
        setIconImage(icon.getImage());
+        setTitle("Sign in");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        setLocationRelativeTo(null);
        setResizable(false);

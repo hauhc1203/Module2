@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/Week1/BaiTap/BaiTap.iml" filepath="$PROJECT_DIR$/Week1/BaiTap/BaiTap.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week2/BaiTapThem/BaiTapThem.iml" filepath="$PROJECT_DIR$/Week2/BaiTapThem/BaiTapThem.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week2/BaiTapW2/BaiTapW2.iml" filepath="$PROJECT_DIR$/Week2/BaiTapW2/BaiTapW2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Week5/CaseStudy/CaseStudy.iml" filepath="$PROJECT_DIR$/Week5/CaseStudy/CaseStudy.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week1/MiniTest/MiniTest.iml" filepath="$PROJECT_DIR$/Week1/MiniTest/MiniTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Module2.iml" filepath="$PROJECT_DIR$/.idea/Module2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week3/Optional/Optional.iml" filepath="$PROJECT_DIR$/Week3/Optional/Optional.iml" />
@@ -28,6 +29,7 @@
       <module fileurl="file://$PROJECT_DIR$/Week2/Week2.iml" filepath="$PROJECT_DIR$/Week2/Week2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week3/Week3.iml" filepath="$PROJECT_DIR$/Week3/Week3.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week4/Week4.iml" filepath="$PROJECT_DIR$/Week4/Week4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Week5/Week5.iml" filepath="$PROJECT_DIR$/Week5/Week5.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week3/linkedlist/linkedlist.iml" filepath="$PROJECT_DIR$/Week3/linkedlist/linkedlist.iml" />
     </modules>
   </component>
