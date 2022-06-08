@@ -1,5 +1,6 @@
 package controller;
 
+import constant.Constant;
 import validate.*;
 
 import java.util.Scanner;
@@ -25,18 +26,24 @@ public class InputController
 
     }
 
-    public int maSp(MSPValidate mspValidate){
+    public int maSp(MSPValidate mspValidate,int state){
         int maP;
+
         while (true){
            try {
                System.out.println("Nhập vào mã sản phẩm có 4 chữ số");
-               maP=Integer.parseInt(scanner.nextLine());
+               String ma=scanner.nextLine();
+               if ((state== Constant.UPDATE||state==Constant.DELETE)&&ma.equals("")){
+                   return -1;
+               }
+               maP=Integer.parseInt(ma);
                if (mspValidate.validate(String.valueOf(maP))){
                    return maP;
                }
            }catch (Exception e){
                System.out.println("Chỉ nhập số");
            }
+
         }
     }
 

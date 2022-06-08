@@ -2,6 +2,7 @@ package main;
 
 import controller.InputController;
 import controller.ProductController;
+import io.ReadAndWrite;
 import model.Product;
 import validate.*;
 
@@ -16,9 +17,8 @@ public class Main {
         StringValidate stringValidate=new StringValidate();
         PriceValidate priceValidate=new PriceValidate();
         QuantityValidate quantityValidate=new QuantityValidate();
-
-        ProductController productController=new ProductController(products,inputController,choiceValidate,mspValidate,stringValidate,priceValidate,quantityValidate);
-
+        ReadAndWrite readAndWrite=new ReadAndWrite();
+        ProductController productController=new ProductController(products,inputController,choiceValidate,mspValidate,stringValidate,priceValidate,quantityValidate ,readAndWrite);
         while (true){
             productController.menu();
         }

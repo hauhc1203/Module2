@@ -38,6 +38,7 @@ public class ReadAndWriteData {
 
 
         } catch (IOException e) {
+            System.out.println("File dữ liệu chưa tồn tại");
             throw new RuntimeException(e);
         }
 
