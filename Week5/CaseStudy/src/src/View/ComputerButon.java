@@ -7,12 +7,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ButtonC extends JFrame {
+public class ComputerButon extends JFrame {
     JButton edit;
     JButton delete;
     JButton  cancel;
 
-    public ButtonC(int index) {
+    public ComputerButon(int index) {
         Container cp=this.getContentPane();
         cp.setLayout(new GridLayout(3,0,0,5));
         edit =new JButton("Edit");

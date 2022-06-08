@@ -11,7 +11,7 @@ public class ComputerTableView extends JFrame {
     private JScrollPane jScrollPane;
     private JTable computerTable1;
 
-    private ButtonC buttonC;
+    private ComputerButon buttonC;
     public ComputerTableView(ComputerTable computerTable) {
 
         Container cp=this.getContentPane();
@@ -25,7 +25,7 @@ public class ComputerTableView extends JFrame {
             public void mouseClicked(MouseEvent e) {
              int index=   computerTable1.rowAtPoint(new Point(e.getX(),e.getY()));
 
-                buttonC=new ButtonC(index);
+                buttonC=new ComputerButon(index);
 
 
             }

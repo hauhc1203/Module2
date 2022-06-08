@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
     private JScrollPane jScrollPane;
     private JTable computerTable1;
 
-    private ButtonC buttonC;
+    private ComputerButon buttonC;
 
     public MainFrame(ComputerTable computerTable) {
         Font inDam=new Font("in dam",Font.TRUETYPE_FONT,15);
@@ -98,7 +98,7 @@ public class MainFrame extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 int index=   computerTable1.rowAtPoint(new Point(e.getX(),e.getY()));
 
-                buttonC=new ButtonC(index);
+                buttonC=new ComputerButon(index);
 
 
             }
