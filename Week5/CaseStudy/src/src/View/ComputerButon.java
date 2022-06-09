@@ -12,7 +12,7 @@ public class ComputerButon extends JFrame {
     JButton delete;
     JButton  cancel;
 
-    public ComputerButon(int index) {
+    public ComputerButon(int index, ComputerController computerController) {
         Container cp=this.getContentPane();
         cp.setLayout(new GridLayout(3,0,0,5));
         edit =new JButton("Edit");
@@ -24,7 +24,7 @@ public class ComputerButon extends JFrame {
 
                 int confirm=JOptionPane.showConfirmDialog(null,"Ban co muon xoa");
                 if (confirm==JOptionPane.OK_OPTION){
-                    ComputerController.delete(index);
+                    computerController.delete(index);
                     JOptionPane.showMessageDialog(null,"Đã xóa thành công");
                 }
             }

@@ -6,12 +6,22 @@ public class Computer {
     private String name;
 
     private String quality;
-    private int status;
+    private double moneyPerHour=0.0;
+    private int status=ComputerConstant.OFF;
 
-    public Computer(String name,String quality, int status) {
+    private String usedBY=null ;
+
+    public Computer(String name,String quality) {
         this.name = name;
         this.quality=quality;
+    }
+
+    public Computer(String name, String quality, double moneyPerHour, int status, String usedBY) {
+        this.name = name;
+        this.quality = quality;
+        this.moneyPerHour = moneyPerHour;
         this.status = status;
+        this.usedBY = usedBY;
     }
 
     public Computer() {

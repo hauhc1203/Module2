@@ -1,11 +1,22 @@
 package src.Validate;
 
+import src.Model.Account;
+
+import java.util.ArrayList;
+
 public class ValidateAcc {
 
-    public static boolean validate(String username, String pass){
-        if (username.equals("hauhc1203")&&pass.equals("abcd1234")){
-                return true ;
-        }else  return false;
+
+
+
+    public  Account validate(String username, String pass,ArrayList<Account> accounts){
+        for (int i = 0; i < accounts.size() ; i++) {
+            Account account=accounts.get(i);
+            if (account.getUserName().equals(username)&&account.getPassWord().equals(pass)){
+                return account;
+            }
+        }
+        return null;
     }
 
 }

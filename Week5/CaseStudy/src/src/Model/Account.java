@@ -11,7 +11,7 @@ public class Account {
     private String realName;
     private int age;
     private int permisson=1;
-    private double soDu;
+    private double soDu=10000;
 
 
     public Account(String userName, String passWord, String phoneNumber, String email, String realName, int age, int permisson,double soDu) {

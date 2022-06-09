@@ -1,5 +1,6 @@
 package src.View;
 
+import src.Controller.ComputerController;
 import src.Model.ComputerTable;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ public class ComputerTableView extends JFrame {
     private JTable computerTable1;
 
     private ComputerButon buttonC;
-    public ComputerTableView(ComputerTable computerTable) {
+    public ComputerTableView(ComputerTable computerTable, ComputerController computerController) {
 
         Container cp=this.getContentPane();
         setTitle("Computer");
@@ -25,7 +26,7 @@ public class ComputerTableView extends JFrame {
             public void mouseClicked(MouseEvent e) {
              int index=   computerTable1.rowAtPoint(new Point(e.getX(),e.getY()));
 
-                buttonC=new ComputerButon(index);
+                buttonC=new ComputerButon(index,computerController);
 
 
             }

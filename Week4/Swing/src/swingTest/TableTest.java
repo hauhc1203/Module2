@@ -25,7 +25,7 @@ public class TableTest extends JFrame {
         table.setPreferredScrollableViewportSize(
                 new Dimension(500, 70));
         table.setFillsViewportHeight(true);
-       JScrollPane scrollPane = new JScrollPane(table);
+        JScrollPane scrollPane = new JScrollPane(table);
         container.add(scrollPane);
         setTitle("JTabbedPane Demo");
         //setSize(500,400);

@@ -1,77 +1,49 @@
 package src.Controller;
 
 import src.Model.Computer;
-import src.Model.ComputerTable;
-import src.View.MainFrame;
 
 import java.util.ArrayList;
 
 public class ComputerController {
-    static ArrayList<Computer> computers=new ArrayList<>();
-     static ComputerTable computerTable=new ComputerTable(computers);
-    static MainFrame computerTableView;
+     ArrayList<Computer> computers=new ArrayList<>();
+
+
+
     public ComputerController() {
-        computers.add(new Computer("Máy 1","Tốt",1));
-        computers.add(new Computer("Máy 2","Khá",0));
-        computers.add(new Computer("Máy 3","TB",2));
-        computers.add(new Computer("Máy 4","Khá",3));
-        computers.add(new Computer("Máy 5","Tốt",1));
-//        computers.add(new Computer("Máy 1","Tốt",1));
-//        computers.add(new Computer("Máy 2","Khá",0));
-//        computers.add(new Computer("Máy 3","TB",2));
-//        computers.add(new Computer("Máy 4","Khá",3));
-//        computers.add(new Computer("Máy 5","Tốt",1));
-//        computers.add(new Computer("Máy 1","Tốt",1));
-//        computers.add(new Computer("Máy 2","Khá",0));
-//        computers.add(new Computer("Máy 3","TB",2));
-//        computers.add(new Computer("Máy 4","Khá",3));
-//        computers.add(new Computer("Máy 5","Tốt",1));
-//        computers.add(new Computer("Máy 1","Tốt",1));
-//        computers.add(new Computer("Máy 2","Khá",0));
-//        computers.add(new Computer("Máy 3","TB",2));
-//        computers.add(new Computer("Máy 4","Khá",3));
-//        computers.add(new Computer("Máy 5","Tốt",1));
-//        computers.add(new Computer("Máy 1","Tốt",1));
-//        computers.add(new Computer("Máy 2","Khá",0));
-//        computers.add(new Computer("Máy 3","TB",2));
-//        computers.add(new Computer("Máy 4","Khá",3));
-//        computers.add(new Computer("Máy 5","Tốt",1));
-//        computers.add(new Computer("Máy 1","Tốt",1));
-//        computers.add(new Computer("Máy 2","Khá",0));
-//        computers.add(new Computer("Máy 3","TB",2));
-//        computers.add(new Computer("Máy 4","Khá",3));
-//        computers.add(new Computer("Máy 5","Tốt",1));
-//        computers.add(new Computer("Máy 1","Tốt",1));
-//        computers.add(new Computer("Máy 2","Khá",0));
-//        computers.add(new Computer("Máy 3","TB",2));
-//        computers.add(new Computer("Máy 4","Khá",3));
-//        computers.add(new Computer("Máy 5","Tốt",1));
-//        computers.add(new Computer("Máy 1","Tốt",1));
-//        computers.add(new Computer("Máy 2","Khá",0));
-//        computers.add(new Computer("Máy 3","TB",2));
-//        computers.add(new Computer("Máy 4","Khá",3));
-//        computers.add(new Computer("Máy 5","Tốt",1));
+        computers.add(new Computer("Máy 1","Tốt"));
+        computers.add(new Computer("Máy 2","Khá"));
+        computers.add(new Computer("Máy 3","TB"));
+        computers.add(new Computer("Máy 4","Khá"));
+        computers.add(new Computer("Máy 5","Tốt"));
+        computers.add(new Computer("Máy 6","Tốt"));
+        computers.add(new Computer("Máy 7","Khá"));
+        computers.add(new Computer("Máy 8","TB"));
+        computers.add(new Computer("Máy 9","Khá"));
+        computers.add(new Computer("Máy 10","Tốt"));
+
     }
 
 
-    public static void show(){
 
-        computerTableView=new MainFrame(computerTable);
-    }
 
-    public static void delete(int index){
 
+    public  void delete(int index){
         computers.remove(index);
-        computerTableView.setVisible(false);
-        ComputerController.show();
-        System.out.println(computers.size());
 
     }
 
-//    public static void main(String[] args) {
-//        ComputerController computerController=new ComputerController();
-//        computerController.show();
-//    }
+    public void add(Computer computer){
+        computers.add(computer);
+    }
+    public void add (String name,String chatLuong){
+        computers.add(create(name,chatLuong));
+    }
+    public Computer create(String name,String chatLuong){
+        return new Computer(name,chatLuong);
 
+    }
 
+    public  ArrayList<Computer> getComputers() {
+        return computers;
+    }
 }

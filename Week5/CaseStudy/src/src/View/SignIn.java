@@ -15,12 +15,16 @@ public class SignIn extends JFrame {
     private JTextField userName;
     private JPasswordField passwordField;
 
+
+
+
+
     @Override
     public void setVisible(boolean b) {
         super.setVisible(b);
     }
 
-    public SignIn()  {
+    public SignIn(SignInController signInController)  {
 
         FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER,120,40);
         Font nghieng=new Font("nghieng",Font.PLAIN,12);
@@ -100,7 +104,7 @@ public class SignIn extends JFrame {
                 String pass=passwordField.getText();
 
                 if (ValidateUserName.validate(name)&&PasswordValidate.validate(pass)){
-                       SignInController.validate(name,pass);
+                       signInController.validate(name,pass);
                 }else {
                     JOptionPane.showMessageDialog(null,"Username hoặc password không hợp lệ");
                 }
@@ -130,7 +134,5 @@ public class SignIn extends JFrame {
     }
 
 
-    public static void main(String[] args) {
-        new SignIn();
-    }
+
 }
