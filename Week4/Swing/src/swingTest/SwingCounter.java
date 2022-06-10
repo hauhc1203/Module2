@@ -58,11 +58,8 @@ public class SwingCounter  extends JFrame {
         comboCount.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-
-
-               // if (e.getStateChange() == ItemEvent.SELECTED) {
                        step = (Integer) comboCount.getSelectedItem();
-                //}
+
 
             }
         });
