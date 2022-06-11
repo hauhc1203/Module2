@@ -3,38 +3,53 @@ package Main;
 import Controller.AccountController;
 import Controller.ComputerController;
 import Controller.SignInController;
-import Model.Account;
-import Model.Computer;
+import Model.AccountTable;
 import Model.ComputerTable;
+import Model.StaffAccTable;
 import Validate.ValidateAcc;
 
-import java.util.ArrayList;
+public class Main extends Thread {
+    AccountController accountController;
+    ComputerController computerController;
+    ComputerTable computerTable;
+    AccountTable accountTable;
+    StaffAccTable staffAccTable;
+    ValidateAcc validateAcc;
 
-public class Main {
-    public static void main(String[] args) {
-        AccountController accountController=new AccountController();
-        ArrayList<Account> accounts=accountController.read();
-        accountController.setAccounts(accounts);
+    public Main(AccountController accountController, ComputerController computerController, ComputerTable computerTable, AccountTable accountTable, StaffAccTable staffAccTable, ValidateAcc validateAcc) {
+        this.accountController = accountController;
+        this.computerController = computerController;
+        this.computerTable = computerTable;
+        this.accountTable = accountTable;
+        this.staffAccTable = staffAccTable;
+        this.validateAcc = validateAcc;
+    }
 
-        ComputerController computerController=new ComputerController();
-        ArrayList<Computer> computers=  computerController.read();
-         computerController.setComputers(computers);
+    @Override
+    public void run(){
 
-        ComputerTable computerTable=new ComputerTable(computers);
-        ValidateAcc validateAcc=new ValidateAcc();
-
-        SignInController signInController=new SignInController(accounts,validateAcc,computerController,computers,computerTable,accountController);
+        SignInController signInController=new SignInController(validateAcc,computerController,computerTable,accountController,accountTable,staffAccTable);
         signInController.signIn();
 
+    }
+    public static void main(String[] args) {
+        AccountController accountController=new AccountController();
 
+        ComputerController computerController=new ComputerController();
 
+        ComputerTable computerTable=new ComputerTable(computerController.getComputers());
+        AccountTable accountTable=new AccountTable(accountController.getAccounts());
+        StaffAccTable staffAccTable=new StaffAccTable(accountController.getAccounts());
+        ValidateAcc validateAcc=new ValidateAcc();
 
+        Main thread=new Main(accountController,computerController,computerTable,accountTable,staffAccTable,validateAcc);
+        Main thread1=new Main(accountController,computerController,computerTable,accountTable,staffAccTable,validateAcc);
+        Main thread2=new Main(accountController,computerController,computerTable,accountTable,staffAccTable,validateAcc);
 
+        thread.start();
+        thread1.start();
+        thread2.start();
 
 
     }
 }
-//        accounts.add(new Account("hauhc1203","abcd1234","0345066663","hau.hc1203@gmail.com","Hoàng Công Hậu",24, AccountConstant.ADMIN,10000));
-//        accounts.add(new Account("thepham1","abcd1234"));
-//        accounts.add(new Account("duongtran","abcd1234"));
-//        accounts.add(new Account("haireal123","abcd1234"));

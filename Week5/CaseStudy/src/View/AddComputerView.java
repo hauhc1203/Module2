@@ -20,16 +20,16 @@ public class AddComputerView extends JFrame {
     JLabel chatLuong;
 
     JTextField textFieldName;
-    JTextField chatluongTextfield;
+    JComboBox chatluongTextfield;
 
     JButton add;
     JButton cancel;
 
+    JFrame admin;
 
+    public AddComputerView(ArrayList<Computer> computers,JTable component1,ComputerController computerController,JFrame jFrame) {
 
-    public AddComputerView(ArrayList<Computer> computers,Component component,JTable component1,ComputerController computerController) {
-
-
+        admin=jFrame;
         Container container=this.getContentPane();
         setLayout(new FlowLayout());
         setSize(500,400);
@@ -87,8 +87,8 @@ public class AddComputerView extends JFrame {
         chatLuong.setPreferredSize(labelDimension);
 
 
-
-        chatluongTextfield=new JTextField();
+        String [] chatluongMay1={"Tốt","Khá","Trung bình"};
+        chatluongTextfield=new JComboBox(chatluongMay1);
         chatluongTextfield.setFont(textFont);
         chatluongTextfield.setPreferredSize(textDimension);
 
@@ -107,20 +107,22 @@ public class AddComputerView extends JFrame {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (computerController.validateCName(textFieldName.getText())){
-                    computerController.addP(textFieldName.getText(),chatluongTextfield.getText());
+                if (computerController.validateCName(textFieldName.getText())==null){
+                    computerController.addP(textFieldName.getText(), String.valueOf(chatluongTextfield.getSelectedItem()));
+                    computerController.save();
                     component1.repaint();
-                    JOptionPane.showMessageDialog(null,"Thêm máy thành công");
+                    admin.setEnabled(true);
                     setVisible(false);
-                    component.setEnabled(true);
+                    JOptionPane.showMessageDialog(null,"Thêm máy thành công");
+
+
+
+
                 }else {
                     JOptionPane.showMessageDialog(null,"Tên máy đã được sử dụng, vui lòng chọn tên khác");
 
                 }
 
-
-
-                //component1.;
 
             }
         });
@@ -131,8 +133,9 @@ public class AddComputerView extends JFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                admin.setEnabled(true);
                 setVisible(false);
-                component.setEnabled(true);
+
             }
         });
 
@@ -156,8 +159,9 @@ public class AddComputerView extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                admin.setEnabled(true);
                 setVisible(false);
-                component.setEnabled(true);
+
             }
         });
 

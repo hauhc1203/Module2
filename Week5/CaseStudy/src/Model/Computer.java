@@ -8,7 +8,10 @@ public class Computer implements Serializable {
     private String name;
 
     private String quality;
-    private double moneyPerHour=0.0;
+    private double tien=5000;
+    private double moneyPerHour=0;
+
+
     private int status=ComputerConstant.OFF;
 
     private String usedBY=null ;
@@ -18,13 +21,16 @@ public class Computer implements Serializable {
         this.quality=quality;
     }
 
-    public Computer(String name, String quality, double moneyPerHour, int status, String usedBY) {
+    public Computer(String name, String quality, double moneyPerHour, int status) {
         this.name = name;
         this.quality = quality;
         this.moneyPerHour = moneyPerHour;
         this.status = status;
-        this.usedBY = usedBY;
+
     }
+
+
+
 
     public Computer() {
     }
@@ -52,6 +58,22 @@ public class Computer implements Serializable {
     public void setQuality(String quality) {
         this.quality = quality;
     }
+    public double getMoneyPerHour() {
+        return moneyPerHour;
+    }
+
+    public void setMoneyPerHour(double moneyPerHour) {
+        this.moneyPerHour = moneyPerHour;
+    }
+
+    public String getUsedBY() {
+        return usedBY;
+    }
+
+    public void setUsedBY(String usedBY) {
+        this.usedBY = usedBY;
+    }
+
 
     @Override
     public String toString() {

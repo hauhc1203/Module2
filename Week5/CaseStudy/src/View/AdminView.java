@@ -1,57 +1,84 @@
 package View;
 
 import Controller.AccountController;
-import Model.Account;
-import Model.ComputerTable;
+import Model.*;
 import Controller.ComputerController;
 import Controller.SignInController;
 import Validate.Validate;
+import constant.AccountConstant;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
 
 public class AdminView extends JFrame {
     JButton profile;
-    JButton qlTK;
+    JButton quanliDonGia;
     Validate validate=new Validate();
     JButton doanhThu;
     JButton logOut;
 
-    JButton addComputer;
+    JButton addElement;
     JButton search;
     JTextField jTextField;
      JScrollPane jScrollPane;
      JTable computerTable1;
-    ComputerButon buttonC;
+    SelectionButon buttonC;
     SignInController signInController;
     JFrame jFrame;
     ProfileView profileView;
 
+    int state=0;
 
-    JLabel validateCN;
 
-    public AdminView(ComputerTable computerTable, Account account, ComputerController computerController , SignInController signInController, AccountController accountController) {
+
+    int count=0;
+    JLabel validateName;
+    InforComputer inforComputer;
+
+
+
+    JTable acc;
+
+
+    JTable accnv;
+    JTabbedPane tabbedPane;
+
+
+
+
+    public AdminView(ComputerTable computerTable, Account account, ComputerController computerController , SignInController signInController, AccountController accountController, AccountTable accountTable, StaffAccTable staffAccTable) {
 
         jFrame=this;
         this.signInController=signInController;
 
         Font inDam=new Font("in dam",Font.TRUETYPE_FONT,15);
         Container cp=this.getContentPane();
-        cp.setLayout(new FlowLayout());
+        cp.setLayout(new FlowLayout(FlowLayout.CENTER,0,10));
         Font innghieng=new Font("innghieng",Font.ITALIC,13);
 
-        JPanel menu=new JPanel(new FlowLayout(FlowLayout.CENTER,45,0));
+        JPanel menu=new JPanel(new FlowLayout(FlowLayout.CENTER,45,10));
         menu.setBorder(new TitledBorder("Menu"));
-        JPanel menuC=new JPanel(new FlowLayout());
+        menu.setPreferredSize(new Dimension(1250,60));
+
+        JPanel menuC=new JPanel(new FlowLayout(FlowLayout.CENTER,30,10));
+        menuC.setPreferredSize(new Dimension(1250,60));
+        menuC.setBorder(BorderFactory.createEtchedBorder(Color.red,Color.BLUE));
+
+
+
 
         profile=new JButton("Profile");
         profile.setFont(inDam);
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                profileView= new ProfileView(account,accountController);
+
+                profileView= new ProfileView(account,accountController,jFrame);
+                jFrame.setEnabled(false);
             }
         });
         profile.setPreferredSize(new Dimension(150,30));
@@ -69,42 +96,60 @@ public class AdminView extends JFrame {
                if ( profileView!=null){
                    profileView.closeCon();
                    profileView.setVisible(false);
-               }
 
+
+               }
+               if (inforComputer!=null){
+                   inforComputer.setVisible(false);
+               }
+                account.setLoginStatus(AccountConstant.CHUA_DANG_NHAP);
+                computerController.save();
+                accountController.save();
                 signInController.logOut(jFrame);
             }
         });
 
 
-        qlTK=new JButton("Quản lý tài khoản");
-        qlTK.setFont(inDam);
-        qlTK.setPreferredSize(new Dimension(150,30));
+        quanliDonGia =new JButton("Quản lý đơn giá");
+        quanliDonGia.setFont(inDam);
+        quanliDonGia.setPreferredSize(new Dimension(150,30));
 
         menu.add(profile);
         menu.add(doanhThu);
 
-        menu.add(qlTK);
+        menu.add(quanliDonGia);
         menu.add(logOut);
 
-        JPanel computer=new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-        validateCN=new JLabel("*Không được bỏ trống",JLabel.LEFT);
-        validateCN.setForeground(Color.BLUE);
-        validateCN.setPreferredSize(new Dimension(300,20));
-        validateCN.setFont(innghieng);
-        computer.setBorder(new TitledBorder("Table Computer"));
+        menu.setBorder(BorderFactory.createEtchedBorder(Color.red,Color.BLUE));
 
 
-        addComputer=new JButton("Thêm máy");
-        addComputer.setFont(inDam);
-        addComputer.setPreferredSize(new Dimension(150,30));
-        addComputer.addActionListener(new ActionListener() {
+
+
+
+
+
+        validateName =new JLabel("*Không được bỏ trống",JLabel.LEFT);
+        validateName.setForeground(Color.BLUE);
+        validateName.setPreferredSize(new Dimension(300,20));
+        validateName.setFont(innghieng);
+
+
+
+        addElement =new JButton("Thêm máy");
+        addElement.setFont(inDam);
+        addElement.setPreferredSize(new Dimension(150,30));
+        addElement.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                addComputer.setEnabled(false);
-                new AddComputerView(computerTable.getComputers(),addComputer,computerTable1,computerController);
-                computerTable1.remove(computerTable1);
-                computerTable1.repaint();
+                jFrame.setEnabled(false);
+                if (state==0){
+                    new AddComputerView(computerTable.getComputers(),computerTable1,computerController,jFrame);
+                }else if (state==1){
+                    new CreateUserAcc(jFrame,accountController);
+                }else {
+                    new CreateStaffAcc(jFrame,accountController);
+                }
+
 
             }
         });
@@ -120,10 +165,13 @@ public class AdminView extends JFrame {
                 String name=jTextField.getText();
                 if (validate.tenMay(name))
                 {
-                    if (computerController.validateCName(name)){
+                    Computer c=computerController.validateCName(name);
+                    if (c==null){
                         JOptionPane.showMessageDialog(null,"Không tìm thấy máy tính với tên vừa nhập");
                     }else {
-                        JOptionPane.showMessageDialog(null,"Tìm thấy máy tính với tên vừa nhập");
+                        jFrame.setEnabled(false);
+                        inforComputer=new InforComputer(computerController,c,"view",jFrame);
+
 
                     }
                 }else {
@@ -142,7 +190,11 @@ public class AdminView extends JFrame {
         jTextField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                jTextField.setText("");
+                if (count==0){
+                    jTextField.setText("");
+                }
+                count++;
+
             }
         });
         jTextField.addKeyListener(new KeyAdapter() {
@@ -150,62 +202,171 @@ public class AdminView extends JFrame {
             public void keyReleased(KeyEvent e) {
 
                 if (validate.tenMay(jTextField.getText())){
-                    validateCN.setForeground(Color.GREEN);
-                    validateCN.setText("Tên hợp lệ");
+                    validateName.setForeground(Color.GREEN);
+                    validateName.setText("Tên hợp lệ");
                 }else {
-                    validateCN.setForeground(Color.RED);
-                    validateCN.setText("Tên máy không chứ kí tự đặc biệt, 6-15 ký tự");
+                    validateName.setForeground(Color.RED);
+                    validateName.setText("Tên máy không chứ kí tự đặc biệt, 6-15 ký tự");
                 }
             }
         });
 
-        menuC.add(addComputer);
+        menuC.add(addElement);
 
 
 
         menuC.add(search);
         menuC.add(jTextField);
-        menuC.add(validateCN);
+        menuC.add(validateName);
 
         computerTable1=new JTable();
+
         computerTable1.setModel(computerTable);
         computerTable1.setFillsViewportHeight(true);
         computerTable1.setRowHeight(40);
         computerTable1.setFont(inDam);
-        computerTable1.setPreferredScrollableViewportSize(new Dimension(800, 200));
+
+
+        computerTable1.setPreferredScrollableViewportSize(new Dimension(800, 300));
         computerTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int index=computerTable1.rowAtPoint(new Point(e.getX(),e.getY()));
                if (index>-1){
-                   buttonC=new ComputerButon(index,computerController);
+                   buttonC=new SelectionButon(index,computerController,null,jFrame);
+                   jFrame.setEnabled(false);
+
                }
             }
         });
         jScrollPane=new JScrollPane();
         jScrollPane.setAutoscrolls(true);
         jScrollPane.setViewportView(computerTable1);
-        computer.add(jScrollPane);
 
 
+
+
+
+        acc=new JTable();
+        acc.setModel(accountTable);
+        acc.setFillsViewportHeight(true);
+        acc.setRowHeight(40);
+        acc.setFont(inDam);
+        acc.setPreferredScrollableViewportSize(new Dimension(800,300));
+        acc.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int index=acc.rowAtPoint(new Point(e.getX(),e.getY()));
+                if (index>-1){
+                    int realIndex=accountController.getIndexByName(accountTable.taiKhoanKH().get(index).getUserName());
+                    jFrame.setEnabled(false);
+                    buttonC=new SelectionButon(realIndex,null,accountController,jFrame);
+
+                }
+            }
+        });
+        JScrollPane jScrollPane1=new JScrollPane();
+        jScrollPane1.setAutoscrolls(true);
+        jScrollPane1.setViewportView(acc);
+
+
+
+        accnv=new JTable();
+        accnv.setModel(staffAccTable);
+        accnv.setFillsViewportHeight(true);
+        accnv.setRowHeight(40);
+        accnv.setFont(inDam);
+        accnv.setEditingColumn(3);
+
+        accnv.setPreferredScrollableViewportSize(new Dimension(1200,300));
+        accnv.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int index=accnv.rowAtPoint(new Point(e.getX(),e.getY()));
+                if (index>-1){
+                    int realIndex=accountController.getIndexByName(staffAccTable.taiKhoanNV().get(index).getUserName());
+                    jFrame.setEnabled(false);
+
+                    buttonC=new SelectionButon(realIndex,null,accountController,jFrame);
+
+                }
+            }
+        });
+        JScrollPane jScrollPane2=new JScrollPane();
+        jScrollPane2.setAutoscrolls(true);
+        jScrollPane2.setViewportView(accnv);
+
+
+        tabbedPane =new JTabbedPane();
+        tabbedPane.addTab("Máy tính",jScrollPane);
+        tabbedPane.addTab("Tài khoản người dùng",jScrollPane1);
+        if (account.getPermisson()==AccountConstant.ADMIN){
+            tabbedPane.addTab("Tài khoản nhân viên",jScrollPane2);
+        }
+
+        tabbedPane.setBorder(BorderFactory.createEtchedBorder(Color.red,Color.BLUE));
+        tabbedPane.setPreferredSize(new Dimension(1250,400));
+
+        tabbedPane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                state=tabbedPane.getSelectedIndex();
+                changeButton(state);
+
+            }
+        });
         cp.add(menu);
         cp.add(menuC);
-        cp.add(computer);
+        cp.add(tabbedPane);
+
+
+
+
+
         setTitle("Phần mềm quản lý quán net");
         ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
         setIconImage(icon.getImage());
-        setSize(1000,500);
+        setSize(1280,720);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                account.setLoginStatus(AccountConstant.CHUA_DANG_NHAP);
                 accountController.save();
                 computerController.save();
+
+            }
+            public void windowClosed(WindowEvent e) {
+                account.setLoginStatus(AccountConstant.CHUA_DANG_NHAP);
+                accountController.save();
+                computerController.save();
+
             }
         });
+
+
         setResizable(false);
         setVisible(true);
     }
+    public void changeButton(int state){
+        switch (state){
+            case 0:
+                addElement.setText("Thêm máy");
+                search.setText("Tìm máy");
+                jTextField.setText("Nhập tên máy");
 
+                break;
+
+
+            case 1:
+            case 2:
+                addElement.setText("Tạo tài khoản");
+                search.setText("Tìm Tài Khoản");
+                jTextField.setText("Nhập username");
+
+                break;
+
+        }
+    }
 }

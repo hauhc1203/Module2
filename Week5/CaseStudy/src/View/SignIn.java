@@ -1,22 +1,22 @@
 package View;
 
 import Controller.SignInController;
+import Model.Computer;
 import Validate.PasswordValidate;
 import Validate.ValidateUserName;
+import constant.ComputerConstant;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class SignIn extends JFrame {
     private JTextField userName;
     private JPasswordField passwordField;
 
 
-
+    PasswordValidate passwordValidate=new PasswordValidate();
+    ValidateUserName validateUserName=new ValidateUserName();
 
 
     @Override
@@ -59,7 +59,7 @@ public class SignIn extends JFrame {
             @Override
            public void keyReleased(KeyEvent e) {
                String username = userName.getText();
-                boolean validName= ValidateUserName.validate(username);
+                boolean validName= validateUserName.validate(username);
 
                if (!validName) {
                    vN.setForeground(Color.RED);
@@ -88,7 +88,7 @@ public class SignIn extends JFrame {
            @Override
            public void keyReleased(KeyEvent e) {
                String pass=passwordField.getText();
-               boolean validPass= PasswordValidate.validate(pass);
+               boolean validPass= passwordValidate.validate(pass);
                if (validPass){
                    vP.setForeground(Color.GREEN);
                    vP.setText("Password hợp lệ");
@@ -109,7 +109,7 @@ public class SignIn extends JFrame {
                 String name=userName.getText();
                 String pass=passwordField.getText();
 
-                if (ValidateUserName.validate(name)&&PasswordValidate.validate(pass)){
+                if (validateUserName.validate(name)&&passwordValidate.validate(pass)){
                        signInController.validate(name,pass);
                 }else {
                     JOptionPane.showMessageDialog(null,"Username hoặc password không hợp lệ");
@@ -133,7 +133,49 @@ public class SignIn extends JFrame {
        ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
        setIconImage(icon.getImage());
         setTitle("Sign in");
-       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+       addWindowListener(new WindowListener() {
+           @Override
+           public void windowOpened(WindowEvent e) {
+
+           }
+
+           @Override
+           public void windowClosing(WindowEvent e) {
+               Computer computer=signInController.getComputer();
+                if (computer!=null){
+                    computer.setStatus(ComputerConstant.OFF);
+                }
+           }
+
+           @Override
+           public void windowClosed(WindowEvent e) {
+               Computer computer=signInController.getComputer();
+               if (computer!=null){
+                   computer.setStatus(ComputerConstant.OFF);
+               }
+           }
+
+           @Override
+           public void windowIconified(WindowEvent e) {
+
+           }
+
+           @Override
+           public void windowDeiconified(WindowEvent e) {
+
+           }
+
+           @Override
+           public void windowActivated(WindowEvent e) {
+
+           }
+
+           @Override
+           public void windowDeactivated(WindowEvent e) {
+
+           }
+       });
        setLocationRelativeTo(null);
        setResizable(false);
        setVisible(true);

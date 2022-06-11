@@ -15,8 +15,10 @@ public class Account implements Serializable {
     private int permisson=1;
     private double soDu=10000;
 
+    private int loginStatus=AccountConstant.CHUA_DANG_NHAP;
 
-    public Account(String userName, String passWord, String phoneNumber, String email, String realName, int age, int permisson,double soDu) {
+
+    public Account(String userName, String passWord, String phoneNumber, String email, String realName, int age, int permisson) {
         this.userName = userName;
         this.passWord = passWord;
         this.phoneNumber = phoneNumber;
@@ -24,7 +26,6 @@ public class Account implements Serializable {
         this.realName = realName;
         this.age = age;
         this.permisson = permisson;
-        this.soDu=soDu;
     }
 
     public Account(String userName, String passWord) {
@@ -96,6 +97,14 @@ public class Account implements Serializable {
         this.soDu = soDu;
     }
 
+    public int getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(int loginStatus) {
+        this.loginStatus = loginStatus;
+    }
+
     @Override
     public String toString() {
         String quyen="";
@@ -128,4 +137,8 @@ public class Account implements Serializable {
                 "so du: "+soDu
                 ;
     }
+
+
+
+
 }

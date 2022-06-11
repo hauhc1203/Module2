@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
 public class ComputerTable extends AbstractTableModel {
-    private String coputerCols[]={"Name","Quality","Status"};
+    private String coputerCols[]={"TÊN","CHẤT LƯỢNG","TIỀN/H","TRẠNG THÁI","NGƯỜI DÙNG"};
     private ArrayList<Computer> computers;
 
     public String[] getCoputerCols() {
@@ -54,6 +54,8 @@ public class ComputerTable extends AbstractTableModel {
             case 1:
                 return computer.getQuality().toUpperCase();
             case 2:
+                return computer.getMoneyPerHour();
+            case 3:
                 String status="";
                 switch (computer.getStatus()){
                     case ComputerConstant.ON:
@@ -71,6 +73,13 @@ public class ComputerTable extends AbstractTableModel {
                 }
 
                 return status.toUpperCase();
+            case 4:
+                String userName=computer.getUsedBY();
+                if (userName==null){
+                    userName="KHÔNG CÓ";
+                }
+
+                return  userName;
             default:
                 return null;
         }

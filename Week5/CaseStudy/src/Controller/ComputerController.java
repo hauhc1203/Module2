@@ -6,13 +6,11 @@ import io.ReadAndWrite;
 import java.util.ArrayList;
 
 public class ComputerController {
-     ArrayList<Computer> computers=new ArrayList<>();
-    String path="D:\\IJ Project\\Module2\\Week5\\CaseStudy\\data\\computer.csv";
-    ReadAndWrite<Computer> readAndWrite=new ReadAndWrite<>();
 
-    public ComputerController() {
+    private String path="D:\\IJ Project\\Module2\\Week5\\CaseStudy\\data\\computer.csv";
+     private ReadAndWrite<Computer> readAndWrite=new ReadAndWrite<>();
 
-    }
+    private   ArrayList<Computer> computers=readAndWrite.read(path);
 
     public  void delete(int index){
         computers.remove(index);
@@ -29,13 +27,13 @@ public class ComputerController {
         return new Computer(name,chatLuong);
 
     }
-    public boolean validateCName(String comupterName){
+    public Computer validateCName(String comupterName){
         for (Computer computer:computers){
             if (computer.getName().equalsIgnoreCase(comupterName)){
-                return false;
+                return computer;
             }
         }
-        return true;
+        return null;
 
     }
 
@@ -48,7 +46,7 @@ public class ComputerController {
         this.computers = computers;
     }
 
-    public void save(){
+    public synchronized void save(){
         readAndWrite.write(computers,path);
     }
 

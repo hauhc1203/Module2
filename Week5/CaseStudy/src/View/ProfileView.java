@@ -2,6 +2,7 @@ package View;
 
 import Controller.AccountController;
 import Model.Account;
+import Validate.Validate;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -9,11 +10,20 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ProfileView extends JFrame {
+
+    Validate validate=new Validate();
     JLabel realName;
+
+    JLabel validateRN;
     JLabel sdt;
+    JLabel validateSdt;
     JLabel email;
+
+    JLabel validateEmail;
     JLabel tuoi;
+     JLabel validateTuoi;
     JLabel username;
+
     JLabel pass;
 
 
@@ -36,21 +46,23 @@ public class ProfileView extends JFrame {
 
     JFrame doimk;
 
+    JFrame adminview;
 
-
-    public ProfileView(Account account, AccountController accountController) {
+    public ProfileView(Account account, AccountController accountController,JFrame jFrame1) {
         jFrame=this;
+        adminview=jFrame1;
         Container container = this.getContentPane();
 
         container.setLayout(new FlowLayout());
         Font labelFont=new Font("labelFont", Font.PLAIN,20);
         Font textFont=new Font("textFont",Font.ITALIC,18);
         Font buttonFont=new Font("buttonFont",Font.ROMAN_BASELINE,20);
+        Font innghieng=new Font("innghieng",Font.ITALIC,13);
 
         Dimension labelDimension=new Dimension(150,30);
         Dimension textDimension=new Dimension(250,30);
         Dimension buttonDimension=new Dimension(200,40);
-
+        Dimension validateLabel=new Dimension(370,20);
 
         information=new JPanel(new FlowLayout(FlowLayout.CENTER,5,10));
         information.setPreferredSize(new Dimension(460,300));
@@ -59,7 +71,10 @@ public class ProfileView extends JFrame {
         titledBorder1.setTitleColor(Color.BLUE);
 
         information.setBorder(titledBorder1);
-
+        validateRN=new JLabel("Nhập tên",JLabel.RIGHT);
+        validateRN.setFont(innghieng);
+        validateRN.setPreferredSize(validateLabel);
+        validateRN.setForeground(Color.BLUE);
 
         realName=new JLabel("Họ và tên: ");
         realName.setFont(labelFont);
@@ -69,7 +84,24 @@ public class ProfileView extends JFrame {
         rName.setFont(textFont);
         rName.setEditable(false);
         rName.setPreferredSize(textDimension);
+        rName.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String rN=rName.getText();
+                if (validate.rName(rN)){
+                    validateRN.setForeground(Color.GREEN);
+                    validateRN.setText("Tên hợp lệ");
+                }else {
+                    validateRN.setForeground(Color.RED);
+                    validateRN.setText("Tên không chứ kí tự đặc biệt, phải viết hoa chữ cái đầu");
+                }
+            }
+        });
 
+        validateSdt=new JLabel("*Nhập số điện thoại",JLabel.RIGHT);
+        validateSdt.setFont(innghieng);
+        validateSdt.setPreferredSize(validateLabel);
+        validateSdt.setForeground(Color.BLUE);
 
         sdt=new JLabel("Số điện thoại: ");
         sdt.setFont(labelFont);
@@ -79,9 +111,24 @@ public class ProfileView extends JFrame {
         sdtT.setFont(textFont);
         sdtT.setEditable(false);
         sdtT.setPreferredSize(textDimension);
+        sdtT.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String sdtR=sdtT.getText();
+                if (validate.validateSdt(sdtR)){
+                    validateSdt.setForeground(Color.GREEN);
+                    validateSdt.setText("Số điện thoại hợp lệ");
+                }else {
+                    validateSdt.setForeground(Color.RED);
+                    validateSdt.setText("Nhập số điện thoại bắt đầu từ 0, gồm 10 chữ số");
+                }
+            }
+        });
 
-
-
+        validateEmail=new JLabel("*Nhập vào email",JLabel.RIGHT);
+        validateEmail.setPreferredSize(validateLabel);
+        validateEmail.setFont(innghieng);
+        validateEmail.setForeground(Color.BLUE);
 
         email=new JLabel("Email: ");
         email.setFont(labelFont);
@@ -91,8 +138,24 @@ public class ProfileView extends JFrame {
         emailT.setFont(textFont);
         emailT.setEditable(false);
         emailT.setPreferredSize(textDimension);
+        emailT.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String emailR=emailT.getText();
+                if (validate.validateEmail(emailR)){
+                    validateEmail.setForeground(Color.GREEN);
+                    validateEmail.setText("Email hợp lệ");
+                }else {
+                    validateEmail.setForeground(Color.RED);
+                    validateEmail.setText("Nhập email có dạng abc.xyz@gmail.com");
+                }
+            }
+        });
 
-
+        validateTuoi=new JLabel("Nhập vào tuổi",JLabel.RIGHT);
+        validateTuoi.setFont(innghieng);
+        validateTuoi.setPreferredSize(validateLabel);
+        validateTuoi.setForeground(Color.BLUE);
 
         tuoi=new JLabel("Tuổi: ");
         tuoi.setFont(labelFont);
@@ -102,7 +165,19 @@ public class ProfileView extends JFrame {
         age.setFont(textFont);
         age.setEditable(false);
         age.setPreferredSize(textDimension);
-
+        age.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String ageT=age.getText();
+                if (validate.validateAge(ageT)&&Integer.parseInt(ageT)>17){
+                    validateTuoi.setForeground(Color.GREEN);
+                    validateTuoi.setText("Tuổi hợp lệ");
+                }else {
+                    validateTuoi.setForeground(Color.RED);
+                    validateTuoi.setText("Nhập tuổi là số , >= 18 tuổi");
+                }
+            }
+        });
 
 
 
@@ -127,16 +202,19 @@ public class ProfileView extends JFrame {
         passW.setEditable(false);
         passW.setPreferredSize(textDimension);
 
-
+        information.add(validateRN);
         information.add(realName);
         information.add(rName);
 
+        information.add(validateSdt);
         information.add(sdt);
         information.add(sdtT);
 
+        information.add(validateEmail);
         information.add(email);
         information.add(emailT);
 
+        information.add(validateTuoi);
         information.add(tuoi);
         information.add(age);
 
@@ -145,6 +223,10 @@ public class ProfileView extends JFrame {
 
         information.add(pass);
         information.add(passW);
+        validateRN.setVisible(false);
+        validateSdt.setVisible(false);
+        validateEmail.setVisible(false);
+        validateTuoi.setVisible(false);
 
         chucNang=new JPanel(new FlowLayout());
 
@@ -156,21 +238,34 @@ public class ProfileView extends JFrame {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                account.setRealName(rName.getText());
-                account.setPhoneNumber(sdtT.getText());
-                account.setEmail(emailT.getText());
-                account.setAge(Integer.parseInt(age.getText()));
-                account.setUserName( userName.getText());
-
-                rName.setEditable(false);
-                sdtT.setEditable(false);
-                emailT.setEditable(false);
-                age.setEditable(false);
-                userName.setEditable(false);
-                save.hide();
-                cancel.hide();
-                edit.show();
-                changePass.show();
+                boolean dk1=validate.rName(rName.getText());
+                boolean dk2=validate.validateSdt(sdtT.getText());
+                boolean dk3=validate.validateEmail(emailT.getText());
+                boolean dk4=validate.validateAge(age.getText());
+                if (dk1&dk2&&dk3&&dk4&&Integer.parseInt(age.getText())>17){
+                    account.setRealName(rName.getText());
+                    account.setPhoneNumber(sdtT.getText());
+                    account.setEmail(emailT.getText());
+                    account.setAge(Integer.parseInt(age.getText()));
+                    information.setPreferredSize(new Dimension(460,300));
+                    validateRN.setVisible(false);
+                    validateSdt.setVisible(false);
+                    validateEmail.setVisible(false);
+                    validateTuoi.setVisible(false);
+                    rName.setEditable(false);
+                    sdtT.setEditable(false);
+                    emailT.setEditable(false);
+                    age.setEditable(false);
+                    setSize(500,450 );
+                    save.hide();
+                    cancel.hide();
+                    edit.show();
+                    changePass.show();
+                    adminview.repaint();
+                    JOptionPane.showMessageDialog(null,"Thay đổi thành công");
+                }else {
+                    JOptionPane.showMessageDialog(null,"Thay đổi thất bại, vui lòng nhập thông tin đúng định dạng");
+                }
 
 
 
@@ -189,12 +284,16 @@ public class ProfileView extends JFrame {
                 sdtT.setText(account.getPhoneNumber());
                 emailT.setText(account.getEmail());
                 age.setText(String.valueOf(account.getAge()));
-                userName.setText(account.getUserName());
+                validateRN.setVisible(false);
+                validateSdt.setVisible(false);
+                validateEmail.setVisible(false);
+                validateTuoi.setVisible(false);
                 rName.setEditable(false);
                 sdtT.setEditable(false);
                 emailT.setEditable(false);
                 age.setEditable(false);
-                userName.setEditable(false);
+                information.setPreferredSize(new Dimension(460,300));
+                setSize(500,450 );
                 save.hide();
                 cancel.hide();
                 edit.show();
@@ -212,15 +311,22 @@ public class ProfileView extends JFrame {
         edit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                information.setPreferredSize(new Dimension(460,450));
+                setSize(500,600);
+                validateRN.setVisible(true);
+                validateSdt.setVisible(true);
+                validateEmail.setVisible(true);
+                validateTuoi.setVisible(true);
                 rName.setEditable(true);
                 sdtT.setEditable(true);
                 emailT.setEditable(true);
                 age.setEditable(true);
-                userName.setEditable(true);
+
                 edit.hide();
                 changePass.hide();
                 save.show();
                 cancel.show();
+                repaint();
             }
         });
         changePass=new JButton("Đổi mật khẩu");
@@ -229,8 +335,9 @@ public class ProfileView extends JFrame {
         changePass.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doimk= new ChangePassView(account,changePass,accountController,passW);
-                changePass.setEnabled(false);
+                jFrame.setEnabled(false);
+                doimk= new ChangePassView(account,accountController,passW,jFrame);
+
             }
         });
         chucNang.add(edit);
@@ -254,6 +361,8 @@ public class ProfileView extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                adminview.setEnabled(true);
+
                 if (doimk!=null){
                     doimk.setVisible(false);
                 }
@@ -271,4 +380,6 @@ public class ProfileView extends JFrame {
             doimk.setVisible(false);
         }
     }
+
+
 }

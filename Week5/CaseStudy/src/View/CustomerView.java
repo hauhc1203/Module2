@@ -1,9 +1,12 @@
 package View;
 
 import Controller.AccountController;
+import Controller.ComputerController;
 import Controller.SignInController;
 import Model.Account;
 import Model.Computer;
+import constant.AccountConstant;
+import constant.ComputerConstant;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -16,7 +19,6 @@ import java.awt.event.WindowEvent;
 public class CustomerView extends JFrame {
     Computer computer;
     Account account;
-
     JPanel head;
     JPanel body;
     JPanel button;
@@ -33,19 +35,15 @@ public class CustomerView extends JFrame {
     JButton doiPass;
     JButton service;
     JButton logOut;
-
     JButton chat;
-
-
     JFrame jFrame;
-
     JFrame doiMK;
-
-
-    public CustomerView(Computer computer, Account account, String date, SignInController signInController, AccountController accountController){
+    ComputerController computerController;
+    public CustomerView(Computer computer, Account account, String date, SignInController signInController, AccountController accountController, ComputerController computerController){
         jFrame=this;
         this.computer=computer;
         this.account=account;
+        this.computerController =computerController;
 
         Dimension textfileDimension=new Dimension(140,30);
         Dimension labelDimension=new Dimension(180,30);
@@ -172,8 +170,9 @@ public class CustomerView extends JFrame {
         doiPass.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                doiMK=  new ChangePassView(account,doiPass,accountController,null);
-                doiPass.setEnabled(false);
+                jFrame.setEnabled(false);
+                doiMK=  new ChangePassView(account,accountController,null,jFrame);
+
 
                 }
         });
@@ -193,6 +192,11 @@ public class CustomerView extends JFrame {
                 if (doiMK!=null){
                     doiMK.setVisible(false);
                 }
+                computer.setUsedBY(null);
+                account.setLoginStatus(AccountConstant.CHUA_DANG_NHAP);
+                computer.setStatus(ComputerConstant.ON);
+                computerController.save();
+                accountController.save();
                 signInController.logOut(jFrame);
             }
         });
@@ -220,26 +224,24 @@ public class CustomerView extends JFrame {
         ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
         setIconImage(icon.getImage());
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                account.setLoginStatus(AccountConstant.CHUA_DANG_NHAP);
+                computer.setStatus(ComputerConstant.OFF);
+                computer.setUsedBY(null);
+                computerController.save();
                 accountController.save();
             }
+            @Override
+            public void windowOpened(WindowEvent e) {
+                computer.setStatus(ComputerConstant.RUNNING);
+                computer.setUsedBY(account.getUserName());
+                accountController.save();
+
+            }
         });
-
-
-
-
-
     }
 
-//    public static void main(String[] args) {
-//        DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("hh:mm - dd/MM");
-//        LocalDateTime now=LocalDateTime.now();
-//
-//        Computer computer1=new Computer("Máy 1","Tốt",1);
-//        Account account1=new Account("thepham1","1");
-//        new CustomerView(computer1,account1,dateTimeFormatter.format(now));
-//    }
 }

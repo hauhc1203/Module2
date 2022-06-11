@@ -17,7 +17,7 @@ public class ChangePassView extends JFrame {
     JButton cancel;
 
 
-
+    PasswordValidate passwordValidate=new PasswordValidate();
     JLabel oldPass;
     JLabel newPass;
     JLabel confirmNewPass;
@@ -35,10 +35,11 @@ public class ChangePassView extends JFrame {
     JPanel button;
 
 
+    JFrame cha;
 
-
-    public ChangePassView(Account account, Component component, AccountController accountController,JTextField jTextField) {
+    public ChangePassView(Account account, AccountController accountController,JTextField jTextField,JFrame cha) {
         this.account = account;
+        this.cha=cha;
 
         Container cp=this.getContentPane();
         cp.setLayout(new FlowLayout());
@@ -80,7 +81,7 @@ public class ChangePassView extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 String pass=newPasswordField.getText();
-                boolean validPass= PasswordValidate.validate(pass);
+                boolean validPass= passwordValidate.validate(pass);
                 if (validPass){
                     validateNewPass.setForeground(Color.GREEN);
                     validateNewPass.setText("Password hợp lệ");
@@ -107,7 +108,7 @@ public class ChangePassView extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 String pass=cNewPasswordField.getText();
-                boolean validPass= PasswordValidate.validate(pass);
+                boolean validPass= passwordValidate.validate(pass);
                 if (validPass&&pass.equals(newPasswordField.getText())){
                     confirmValidateNewPass.setForeground(Color.GREEN);
                     confirmValidateNewPass.setText("Password hợp lệ");
@@ -147,16 +148,18 @@ public class ChangePassView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (account.getPassWord().equals(oldPasswordField.getText())&&newPasswordField.getText().equals(cNewPasswordField.getText())){
-                    if (PasswordValidate.validate(newPasswordField.getText())){
+                    if (passwordValidate.validate(newPasswordField.getText())){
                         accountController.changePass(account,newPasswordField.getText());
                         if (jTextField!=null){
                             jTextField.setText(newPasswordField.getText());
                         }
                         JOptionPane.showMessageDialog(null,"Đổi mật khẩu thành công");
                         accountController.save();
+                        cha.setEnabled(true);
                         setVisible(false);
 
-                        component.setEnabled(true);
+
+
                     }else {
                         JOptionPane.showMessageDialog(null,"Vui lòng nhập mật khẩu hợp lệ");
                     }
@@ -174,8 +177,9 @@ public class ChangePassView extends JFrame {
         cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                cha.setEnabled(true);
                 setVisible(false);
-                component.setEnabled(true);
+
             }
         });
 
@@ -194,7 +198,7 @@ public class ChangePassView extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-            component.setEnabled(true);
+            cha.setEnabled(true);
             }
         });
         ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");

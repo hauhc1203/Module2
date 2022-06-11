@@ -1,12 +1,10 @@
 package Controller;
 
-import Model.Account;
-import Model.ComputerTable;
+import Model.*;
 import Validate.ValidateAcc;
 import View.AdminView;
 import View.CustomerView;
 import constant.AccountConstant;
-import Model.Computer;
 import View.SignIn;
 
 import javax.swing.*;
@@ -26,14 +24,19 @@ public class SignInController {
     ValidateAcc validateAcc;
     Computer computer;
 
+    AccountTable accountTable;
+
+    StaffAccTable staffAccTable;
     AccountController accountController;
-    public SignInController(ArrayList<Account> accounts, ValidateAcc validateAcc, ComputerController computerController, ArrayList<Computer> computers, ComputerTable computerTable,AccountController accountController) {
-        this.accounts = accounts;
+    public SignInController(ValidateAcc validateAcc, ComputerController computerController, ComputerTable computerTable, AccountController accountController, AccountTable accountTable, StaffAccTable staffAccTable) {
+        this.accounts = accountController.getAccounts();
         this.validateAcc=validateAcc;
         this.computerController=computerController;
-        this.computers=computers;
+        this.computers=computerController.getComputers();
         this.computerTable=computerTable;
         this.accountController=accountController;
+        this.accountTable=accountTable;
+        this.staffAccTable =staffAccTable;
     }
 
     public  void signIn(){
@@ -41,34 +44,44 @@ public class SignInController {
 
     }
 
-    public  void show(Account account,ComputerController computerController,AccountController accountController){
-        new AdminView(computerTable,account, computerController,this,accountController);
-    }
+
 
     int c=0;
     public  void validate(String userName, String pass){
         account=validateAcc.validate(userName,pass,accounts);
         if (account!=null){
-            JOptionPane.showMessageDialog(null,"Đăng nhập thành công");
-            signIn.setVisible(false);
+            if (account.getLoginStatus()==AccountConstant.CHUA_DANG_NHAP){
+                account.setLoginStatus(AccountConstant.DA_DANG_NHAP);
+                JOptionPane.showMessageDialog(null,"Đăng nhập thành công");
+                signIn.setVisible(false);
 
-            switch (account.getPermisson()){
-                case AccountConstant.ADMIN:
-                case AccountConstant.STAFF:
-                    show(account,computerController,accountController);
-                    break;
-                case AccountConstant.USER:
-                     DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("hh:mm - dd/MM");
-                     LocalDateTime now=LocalDateTime.now();
-                     if(computer==null){
-                         int index= (int) (Math.random()*(computerController.computers.size()));
-                         computer=computers.get(index);
-                     }
-                     new CustomerView(computer,account,dateTimeFormatter.format(now),this,accountController);
-                     break;
+                switch (account.getPermisson()){
+                    case AccountConstant.ADMIN:
+                    case AccountConstant.STAFF:
+                        new AdminView(computerTable,account, computerController,this,accountController,accountTable,staffAccTable);
+                        break;
+                    case AccountConstant.USER:
 
+                        DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("hh:mm - dd/MM");
+                        LocalDateTime now=LocalDateTime.now();
+                        if(computer==null){
+                            do {
+                                int index= (int) (Math.random()*(computerController.getComputers().size()));
+                                computer=computers.get(index);
+                            }while (computer.getUsedBY()!=null);
+                        }
+                        new CustomerView(computer,account,dateTimeFormatter.format(now),this,accountController,computerController);
+                        break;
+
+                }
+                JOptionPane.showMessageDialog(null,"Xin chào "+userName);
+            }else {
+                JOptionPane.showMessageDialog(null,"Tài khoản đã được đang nhập ở nơi khác");
             }
-            JOptionPane.showMessageDialog(null,"Xin chào "+userName);
+
+
+
+
         }else {
 
            if (state.equals("login")){
@@ -92,6 +105,14 @@ public class SignInController {
 
     public Account getAccount() {
         return account;
+    }
+
+    public Computer getComputer() {
+        return computer;
+    }
+
+    public void setComputer(Computer computer) {
+        this.computer = computer;
     }
 }
 
