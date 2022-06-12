@@ -115,9 +115,11 @@ public class AdminView extends JFrame {
         quanliDonGia.setPreferredSize(new Dimension(150,30));
 
         menu.add(profile);
-        menu.add(doanhThu);
+       if (account.getPermisson()==AccountConstant.ADMIN){
+           menu.add(doanhThu);
 
-        menu.add(quanliDonGia);
+           menu.add(quanliDonGia);
+       }
         menu.add(logOut);
 
         menu.setBorder(BorderFactory.createEtchedBorder(Color.red,Color.BLUE));
@@ -355,7 +357,7 @@ public class AdminView extends JFrame {
         setTitle("Phần mềm quản lý quán net");
         ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
         setIconImage(icon.getImage());
-        setSize(1280,720);
+        setSize(1280,600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {

@@ -148,7 +148,7 @@ public class ChangePassView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (account.getPassWord().equals(oldPasswordField.getText())&&newPasswordField.getText().equals(cNewPasswordField.getText())){
-                    if (passwordValidate.validate(newPasswordField.getText())){
+                    if (passwordValidate.validate(newPasswordField.getText())&&!newPasswordField.getText().equals(account.getPassWord())){
                         accountController.changePass(account,newPasswordField.getText());
                         if (jTextField!=null){
                             jTextField.setText(newPasswordField.getText());
@@ -161,7 +161,7 @@ public class ChangePassView extends JFrame {
 
 
                     }else {
-                        JOptionPane.showMessageDialog(null,"Vui lòng nhập mật khẩu hợp lệ");
+                        JOptionPane.showMessageDialog(null,"Vui lòng nhập mật khẩu hợp lệ, không trùng mật khẩu cũ");
                     }
                 }else {
                     JOptionPane.showMessageDialog(null,"Đổi mật khẩu  thất bại");

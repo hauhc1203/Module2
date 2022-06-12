@@ -47,8 +47,8 @@ public class Main extends Thread {
         Main thread2=new Main(accountController,computerController,computerTable,accountTable,staffAccTable,validateAcc);
 
         thread.start();
-        thread1.start();
-        thread2.start();
+//        thread1.start();
+//        thread2.start();
 
 
     }
