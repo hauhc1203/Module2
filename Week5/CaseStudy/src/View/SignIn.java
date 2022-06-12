@@ -21,7 +21,7 @@ public class SignIn extends JFrame {
 
     PasswordValidate passwordValidate=new PasswordValidate();
     ValidateUserName validateUserName=new ValidateUserName();
-
+    Computer computer;
 
     @Override
     public void setVisible(boolean b) {
@@ -30,7 +30,7 @@ public class SignIn extends JFrame {
 
     public SignIn(SignInController signInController)  {
 
-
+       computer=signInController.getComputer();
 
 
         Font innghieng=new Font("innghieng",Font.ITALIC,13);
@@ -124,7 +124,10 @@ public class SignIn extends JFrame {
        cancel.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
-               System.exit(0);
+               if (computer!=null){
+                   computer.setStatus(ComputerConstant.OFF);
+               }
+               setVisible(false);
            }
        });
 
@@ -181,7 +184,7 @@ public class SignIn extends JFrame {
 
            @Override
            public void windowClosing(WindowEvent e) {
-               Computer computer=signInController.getComputer();
+
                 if (computer!=null){
                     computer.setStatus(ComputerConstant.OFF);
                 }
@@ -189,7 +192,7 @@ public class SignIn extends JFrame {
 
            @Override
            public void windowClosed(WindowEvent e) {
-               Computer computer=signInController.getComputer();
+
                if (computer!=null){
                    computer.setStatus(ComputerConstant.OFF);
                }
