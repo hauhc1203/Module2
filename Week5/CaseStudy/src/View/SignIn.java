@@ -7,6 +7,7 @@ import Validate.ValidateUserName;
 import constant.ComputerConstant;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -14,6 +15,9 @@ public class SignIn extends JFrame {
     private JTextField userName;
     private JPasswordField passwordField;
 
+    JPanel general;
+    JPanel infor;
+    JPanel button;
 
     PasswordValidate passwordValidate=new PasswordValidate();
     ValidateUserName validateUserName=new ValidateUserName();
@@ -26,31 +30,30 @@ public class SignIn extends JFrame {
 
     public SignIn(SignInController signInController)  {
 
+
+
+
         Font innghieng=new Font("innghieng",Font.ITALIC,13);
 
-        FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER,120,40);
-        Font nghieng=new Font("nghieng",Font.PLAIN,12);
+
         Font inDam=new Font("dam",Font.BOLD ,18);
         Container cp=this.getContentPane();
-        cp.setLayout(new GridLayout(5,0,0,20));
+        cp.setLayout(new FlowLayout());
 
-        JPanel uName=new JPanel(new FlowLayout(FlowLayout.CENTER,5,0));
-        JPanel passW=new JPanel(new FlowLayout(FlowLayout.CENTER,5,0));
-        JPanel button=new JPanel(flowLayout);
 
         JLabel cap1=new JLabel("Bạn phải đăng nhập để sử dụng hệ thống !",JLabel.CENTER);
         cap1.setFont(inDam);
-        cp.add(cap1);
+
 
         JLabel vN=new JLabel("Nhập vào UserName có 8 đến 10 ký tự",JLabel.RIGHT);
         vN.setFont(innghieng);
-        vN.setPreferredSize(new Dimension(450,20));
-        uName.add(vN);
+        vN.setPreferredSize(new Dimension(420,20));
+
 
         JLabel uNameLabel=new JLabel("User name:");
         uNameLabel.setFont(inDam);
         uNameLabel.setPreferredSize(new Dimension(150,60));
-        uName.add(uNameLabel);
+
 
          userName=new JTextField(25);
          userName.setPreferredSize(new Dimension(150,30));
@@ -70,18 +73,18 @@ public class SignIn extends JFrame {
                }
            }
        });
-       uName.add(userName);
+
 
         JLabel vP=new JLabel("Nhập password ít nhất 8 kí tự",JLabel.RIGHT);
         vP.setFont(innghieng);
-        vP.setPreferredSize(new Dimension(450,20));
-        passW.add(vP);
+        vP.setPreferredSize(new Dimension(420,20));
+
 
        JLabel passLabel=new JLabel("Password:");
        passLabel.setFont(inDam);
        passLabel.setPreferredSize(new Dimension(150,60));
 
-       passW.add(passLabel);
+
        passwordField=new JPasswordField(25);
        passwordField.setPreferredSize(new Dimension(150,30));
        passwordField.addKeyListener(new KeyAdapter() {
@@ -101,7 +104,7 @@ public class SignIn extends JFrame {
        });
 
 
-       passW.add(passwordField);
+
        JButton signIn=new JButton("Sign in");
         signIn.addActionListener(new ActionListener() {
             @Override
@@ -116,7 +119,7 @@ public class SignIn extends JFrame {
                 }
             }
         });
-       button.add(signIn);
+
        JButton cancel=new JButton("Cancel");
        cancel.addActionListener(new ActionListener() {
            @Override
@@ -124,11 +127,47 @@ public class SignIn extends JFrame {
                System.exit(0);
            }
        });
-       button.add(cancel);
-       cp.add(uName);
-       cp.add(passW);
-       cp.add(button);
-        setSize(500,450);
+
+
+        infor=new JPanel(new FlowLayout(FlowLayout.LEFT,5,0));
+        TitledBorder infoBorder=new TitledBorder("Thông tin đăng nhập");
+        infoBorder.setTitleColor(Color.BLUE);
+
+        infor.setBorder(infoBorder);
+
+        infor.setPreferredSize(new Dimension(450,200));
+        infor.add(vN);
+        infor.add(uNameLabel);
+        infor.add(userName);
+
+        infor.add(vP);
+        infor.add(passLabel);
+        infor.add(passwordField);
+
+
+        button=new JPanel(new FlowLayout(FlowLayout.CENTER ,80,10));
+        button.setPreferredSize(new Dimension(450,50));
+        TitledBorder buttonBorder=new TitledBorder("");
+        buttonBorder.setTitleColor(Color.BLUE);
+        button.setBorder(buttonBorder);
+
+        button.add(signIn);
+        button.add(cancel);
+
+        cap1.setForeground(Color.red);
+
+        general=new JPanel(new FlowLayout(FlowLayout.CENTER,0,20));
+        general.setBorder(BorderFactory.createEtchedBorder(Color.BLACK,Color.RED));
+        general.setPreferredSize(new Dimension(500,350));
+
+        general.add(cap1);
+        general.add(infor);
+        general.add(button);
+
+
+        cp.add(general);
+
+        setSize(600,450);
 
        ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
        setIconImage(icon.getImage());
@@ -177,7 +216,7 @@ public class SignIn extends JFrame {
            }
        });
        setLocationRelativeTo(null);
-       setResizable(false);
+        setResizable(false);
        setVisible(true);
     }
 
