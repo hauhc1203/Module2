@@ -11,6 +11,14 @@ public class ComputerController {
      private ReadAndWrite<Computer> readAndWrite=new ReadAndWrite<>();
 
     private   ArrayList<Computer> computers=readAndWrite.read(path);
+//    {
+//        computers.add(new Computer("Computer1","tốt"));
+//        computers.add(new Computer("Computer2","tốt"));
+//        computers.add(new Computer("Computer3","tốt"));
+//        computers.add(new Computer("Computer4","tốt"));
+//
+//    }
+            //readAndWrite.read(path);
 
     public  void delete(int index){
         computers.remove(index);

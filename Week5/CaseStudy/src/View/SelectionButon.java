@@ -2,6 +2,8 @@ package View;
 
 import Controller.AccountController;
 import Controller.ComputerController;
+import Model.Account;
+import constant.AccountConstant;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +32,13 @@ public class SelectionButon extends JFrame {
                             inforComputer=new InforComputer(computerController,computerController.getComputers().get(index),"edit",jFrame);
                             setVisible(false);
                         }else if (accountController!=null){
-                            new ProfileView(accountController.getAccounts().get(index),accountController,jFrame);
+                            Account account=accountController.getAccounts().get(index);
+                            if (account.getPermisson()== AccountConstant.STAFF){
+                                new ProfileView(account,accountController,jFrame);
+                            }else {
+                                new UserInfo(accountController,jFrame,account);
+                            }
+
                             setVisible(false);
                         }
 

@@ -19,6 +19,7 @@ public class Computer implements Serializable {
     public Computer(String name,String quality) {
         this.name = name;
         this.quality=quality;
+        this.moneyPerHour=tinhTien();
     }
 
     public Computer(String name, String quality, double moneyPerHour, int status) {
@@ -29,7 +30,19 @@ public class Computer implements Serializable {
 
     }
 
+    public double tinhTien(){
+        double heSo=1;
 
+        if (this.quality.equalsIgnoreCase("khá")){
+            heSo=2;
+        }else if (this.quality.equalsIgnoreCase("tốt")){
+            heSo=3;
+        }
+
+        return heSo*this.tien;
+
+
+    }
 
 
     public Computer() {

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Validate {
 
-    private final static String  TEN_MAY="\\w{6,15}";
+    private final static String  TEN_MAY="\\w{8,15}";
 
     private final  static String TIEN_GIO="\\d+(.\\d)?";
 

@@ -163,21 +163,50 @@ public class AdminView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String name=jTextField.getText();
-                if (validate.tenMay(name))
-                {
-                    Computer c=computerController.validateCName(name);
-                    if (c==null){
-                        JOptionPane.showMessageDialog(null,"Không tìm thấy máy tính với tên vừa nhập");
-                    }else {
-                        jFrame.setEnabled(false);
-                        inforComputer=new InforComputer(computerController,c,"view",jFrame);
+                if (state==0){
+                    if (validate.tenMay(name))
+                    {
+                        Computer c=computerController.validateCName(name);
+                        if (c==null){
+                            JOptionPane.showMessageDialog(null,"Không tìm thấy máy tính với tên vừa nhập");
+                        }else {
+                            jFrame.setEnabled(false);
+                            inforComputer=new InforComputer(computerController,c,"view",jFrame);
 
+
+                        }
+                    }else {
+                        JOptionPane.showMessageDialog(null,"Vui lòng nhập tên máy tính đúng định dạng");
 
                     }
                 }else {
-                    JOptionPane.showMessageDialog(null,"Vui lòng nhập tên máy tính đúng định dạng");
+                    if (validate.tenMay(name))
+                    {
+                        int index=accountController.getIndexByName(name);
+                        if (index==-1){
+                            JOptionPane.showMessageDialog(null,"Không tìm thấy tài khoản với tên vừa nhập");
+                        }else {
 
+                            Account account1=accountController.getAccounts().get(index);
+
+
+                            jFrame.setEnabled(false);
+
+                            if (account1.getPermisson()==AccountConstant.STAFF){
+                                new ProfileView(account1,accountController,jFrame);
+                            }else {
+                                new UserInfo(accountController,jFrame,account1);
+                            }
+
+
+
+                        }
+                    }else {
+                        JOptionPane.showMessageDialog(null,"Vui lòng nhập tên  tính đúng định dạng");
+
+                    }
                 }
+
 
 
             }
@@ -206,7 +235,7 @@ public class AdminView extends JFrame {
                     validateName.setText("Tên hợp lệ");
                 }else {
                     validateName.setForeground(Color.RED);
-                    validateName.setText("Tên máy không chứ kí tự đặc biệt, 6-15 ký tự");
+                    validateName.setText("Tên không chứ kí tự đặc biệt, 8-15 ký tự");
                 }
             }
         });

@@ -7,10 +7,7 @@ import Validate.ValidateUserName;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class CreateUserAcc extends JFrame {
 
@@ -191,7 +188,44 @@ public class CreateUserAcc extends JFrame {
                 create.setVisible(false);
             }
         });
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
 
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                adminview.setEnabled(true);
+                create.setVisible(false);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                adminview.setEnabled(true);
+                create.setVisible(false);
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
 
         buttonP.add(confirm);
         buttonP.add(cancel);

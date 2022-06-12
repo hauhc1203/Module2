@@ -4,8 +4,8 @@ import Model.*;
 import Validate.ValidateAcc;
 import View.AdminView;
 import View.CustomerView;
-import constant.AccountConstant;
 import View.SignIn;
+import constant.AccountConstant;
 
 import javax.swing.*;
 import java.time.LocalDateTime;
@@ -28,6 +28,8 @@ public class SignInController {
 
     StaffAccTable staffAccTable;
     AccountController accountController;
+
+
     public SignInController(ValidateAcc validateAcc, ComputerController computerController, ComputerTable computerTable, AccountController accountController, AccountTable accountTable, StaffAccTable staffAccTable) {
         this.accounts = accountController.getAccounts();
         this.validateAcc=validateAcc;
@@ -64,13 +66,15 @@ public class SignInController {
 
                         DateTimeFormatter dateTimeFormatter= DateTimeFormatter.ofPattern("hh:mm - dd/MM");
                         LocalDateTime now=LocalDateTime.now();
-                        if(computer==null){
-                            do {
-                                int index= (int) (Math.random()*(computerController.getComputers().size()));
-                                computer=computers.get(index);
-                            }while (computer.getUsedBY()!=null);
-                        }
-                        new CustomerView(computer,account,dateTimeFormatter.format(now),this,accountController,computerController);
+                            if(computer==null){
+                                do {
+                                    int index= (int) (Math.random()*(computerController.getComputers().size()));
+                                    computer=computers.get(index);
+                                }while (computer.getUsedBY()!=null);
+                            }
+
+                            new CustomerView(computer,account,dateTimeFormatter.format(now),this,accountController,computerController);
+
                         break;
 
                 }
