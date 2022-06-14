@@ -42,6 +42,8 @@ public class CreateUserAcc extends JFrame {
         create=this;
 
         Container container=this.getContentPane();
+        ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
+        setIconImage(icon.getImage());
         setResizable(false);
         container.setLayout(new FlowLayout());
         setSize(550,380);

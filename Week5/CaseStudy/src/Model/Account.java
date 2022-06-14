@@ -12,7 +12,7 @@ public class Account implements Serializable {
 
     private String realName;
     private int age;
-    private int permisson=1;
+    private int permisson=AccountConstant.USER;
     private double soDu=10000;
 
     private int loginStatus=AccountConstant.CHUA_DANG_NHAP;

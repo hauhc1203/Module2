@@ -39,10 +39,11 @@ public class SignInController {
         this.accountController=accountController;
         this.accountTable=accountTable;
         this.staffAccTable =staffAccTable;
+
     }
 
     public  void signIn(){
-        signIn=new SignIn(this);
+            signIn=new SignIn(this);
 
     }
 
@@ -93,8 +94,9 @@ public class SignInController {
            }else {
                 signIn.getUserName().setText("");
                 signIn.getPasswordField().setText("");
-               signIn.setVisible(true);
-               state="login";
+                state="login";
+                signIn.setVisible(true);
+
            }
         }
 

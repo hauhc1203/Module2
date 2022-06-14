@@ -44,7 +44,8 @@ public class UserInfo extends JFrame{
         Container container=this.getContentPane();
         container.setLayout(new FlowLayout());
         setSize(500,400);
-
+        ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
+        setIconImage(icon.getImage());
 
         Font labelFont=new Font("labelFont", Font.PLAIN,20);
         Font textFont=new Font("textFont",Font.ITALIC,18);

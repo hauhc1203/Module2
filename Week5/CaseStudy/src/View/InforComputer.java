@@ -58,6 +58,8 @@ public class InforComputer extends JFrame {
         this.adminview=jFrame1;
 
         Container container=this.getContentPane();
+        ImageIcon icon=new ImageIcon("D:\\IJ Project\\Module2\\Week4\\Swing\\img\\logo.jpg");
+        setIconImage(icon.getImage());
         setLayout(new FlowLayout());
         setSize(500,500);
         Font labelFont=new Font("labelFont", Font.PLAIN,20);

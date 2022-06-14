@@ -40,7 +40,7 @@ public class AdminView extends JFrame {
     InforComputer inforComputer;
 
 
-
+    Account account;
     JTable acc;
 
 
@@ -51,7 +51,7 @@ public class AdminView extends JFrame {
 
 
     public AdminView(ComputerTable computerTable, Account account, ComputerController computerController , SignInController signInController, AccountController accountController, AccountTable accountTable, StaffAccTable staffAccTable) {
-
+        this.account=account;
         jFrame=this;
         this.signInController=signInController;
 
@@ -192,14 +192,18 @@ public class AdminView extends JFrame {
                             Account account1=accountController.getAccounts().get(index);
 
 
-                            jFrame.setEnabled(false);
+                            if (account.getPermisson()>account1.getPermisson()){
+                                jFrame.setEnabled(false);
 
-                            if (account1.getPermisson()==AccountConstant.STAFF){
-                                new ProfileView(account1,accountController,jFrame);
+                                if (account1.getPermisson()==AccountConstant.STAFF){
+                                    new ProfileView(account1,accountController,jFrame);
+                                }else {
+                                    new UserInfo(accountController,jFrame,account1);
+                                }
+
                             }else {
-                                new UserInfo(accountController,jFrame,account1);
+                                JOptionPane.showMessageDialog(null,"Không tìm thấy tài khoản với tên vừa nhập");
                             }
-
 
 
                         }
